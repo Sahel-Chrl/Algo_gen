@@ -7,7 +7,7 @@ float hasard () {
 }
 
 int main () {
-    cout<< "Bonjour" <<endl;
+    cout<< "Bonjour!!" <<endl;
     float x,y;
     int n,m;
     cout << "donne un entier" << endl;

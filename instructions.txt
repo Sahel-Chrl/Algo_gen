@@ -1,0 +1,4 @@
+pour compiler: pomme shift B. (B pour Build)
+
+pour lancer: dans un terminal, faire ./nom_du_programme (ici montecarlo)
+
