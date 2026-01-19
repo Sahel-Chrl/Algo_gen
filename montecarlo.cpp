@@ -18,6 +18,7 @@ int main () {
         y=hasard();
         if (x*x+y*y<=1) {
             m++;
+            //point dans le cercle
         }
     }
     cout << 4.*m/n << endl;
