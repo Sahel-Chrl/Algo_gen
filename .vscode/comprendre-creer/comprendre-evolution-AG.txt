@@ -1,0 +1,64 @@
+Les AG se basent sur les principes d'evolution,
+il existe 3 grendes forces evolutives :
+- la selection Naturelle
+- la derive genetique
+- les mutations
+
+--> La Selection Naturelle :
+processus qui fait que les individus presentant les meilleurs
+combinaisons de caracteristiques favorables ont une meilleur chance 
+de survie/reproduction.
+Dans le context des AG c'est reflete par la selection d'individus 
+ayant les meilleurs caracteristiques quand au resultat voulu.
+Leurs reproduction se traduit par une combinaison (voir partie genes) de 2 ou plus de ces 
+solutions satisfaisantes.
+
+
+--> Gènes et Mutations :
+Un organisme biologique est determiné par son code genetique (l'ensembles
+de ses genes) 
+Genes : Elément d'information héréditaire situé sur un chromosome.
+Pour les AG les solutions potentiels a un probleme sont code sous forme 
+de chromosomes (represente par des chaines ou tableaux).
+Chaques elements du chromosome correspond a un gene qui determine un 
+caractere specifique de la solution.
+La recombinaison/reproduction, consiste a echanger des segment de chromosomes (tableaux)
+creer de nouveaux chromosomes/individus.
+La Mutation (changements aleatoirs dans les genes d'un organisme conduisant
+a de nouvelles caracteristiques) se traduit par la modification aleatoire
+des genes. (permet de maintenir la diversite).
+
+--> Derive Genetique :
+Peu utilise dans les AG ?
+
+
+    Dans la nature un individu est evalue par sa capacite de survie 
+et de reproduction. 
+Dans les AG on cree une fonction aptitude qui evalue a quel point 
+une solution resout le probleme pose. Les mauvaises solutions
+disparaissent. Une bonne solution se reproduit plus.
+
+Composantes d'un AG :
+ - Population : ensembles de solutions candidates (individus).
+ Chaque individu est represente par un chromosome code en binaire, 
+ tableau, listes...
+ Dans l'exemple du chemin des camions, chaque individu est un chamin.
+ - Fonction Aptitude : les valeurs les plus eleves/basses/moyennes corespondront aux
+ meilleurs solutions, cette fonction nous quantifie la qualite d'une 
+ solution.
+ Pour les camions, la fonction peut revoyer la vitesse de livraison.
+ - Fonction de Selection : Cette fonction recupere les donnes de la fonction 
+ d'aptitude et les tries.
+ Il existe plusieurs methodes de selection : par tournois, par roulette, par rang...
+ - Fonction de Croisement : combine l'informations de deux/plus individus pour creer
+ une descendance. Les techniques de croisement les plus courantes sont 
+ le croisement en un point/plusieurs point (choisir un/plusieurs point aleatoire et echanger le
+ materiel genetique de deux parents en ce point), le croisement uniforme(decider de maniere 
+ aleatoire quel parent apportera chaque gene), les croisement mixte(melanger les genes des parents).
+ - Fonction mutation : Elle introduit des changements aleatoire dans le materiel genetique de 
+ la progeniture. Ces mutations peuvent etre simples comme complexe.
+
+
+
+Sources :
+https://www.datacamp.com/fr/tutorial/genetic-algorithm-python
