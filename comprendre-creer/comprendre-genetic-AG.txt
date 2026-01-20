@@ -62,3 +62,4 @@ Composantes d'un AG :
 
 Sources :
 https://www.datacamp.com/fr/tutorial/genetic-algorithm-python
+https://www.anyflo.com/bret/cours/ag/ag3.htm#theoreme

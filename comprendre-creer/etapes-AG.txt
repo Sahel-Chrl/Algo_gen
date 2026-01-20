@@ -13,6 +13,12 @@ la nouvelle.
 7// Repetition : activer une fct de repetition. 
 
 
+Le codage doit satisfaire le thm fondamental des AG :
+les shèmes de petite longueur utile, d'ordre faible et de performence au-dessus de
+la moyenne font l'objet d'un nombre de tests exponentiellement croissant au cours des
+generations successives de la population.
+Voire sur https://www.anyflo.com/bret/cours/ag/ag3.htm#theoreme
+
 
 Composantes d'un AG :
  - Population : ensembles de solutions candidates (individus).
@@ -34,6 +40,3 @@ Composantes d'un AG :
  - Fonction mutation : Elle introduit des changements aleatoire dans le materiel genetique de 
  la progeniture. Ces mutations peuvent etre simples comme complexe.
 
-
- Exemple de https://www.datacamp.com/fr/tutorial/genetic-algorithm-python :
-  
