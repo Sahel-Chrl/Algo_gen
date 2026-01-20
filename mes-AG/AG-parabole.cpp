@@ -4,6 +4,12 @@
 #include <utility>
 using namespace std;
 
+/* 
+notre objectif et de prendre des points au hasard dans R2 
+et de trouver la parabole pour laquelle la distance moyenne des 
+points a la courbe est la plus faible
+*/
+
 
 float hasard() {
     return (float)rand();
@@ -28,10 +34,10 @@ vector<std::pair<double, double>> couple(
 
 struct coefs {
     float a,b,c;
-} // je cree mes trois coefs pour la parabole
+}; // je cree mes trois coefs pour la parabole
 
 coefs parabole() {
-    return{1f,2f,3f};
+    return{1.0f,2.0f,3.0f};
 }
 
 
