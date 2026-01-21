@@ -22,6 +22,7 @@ float racine(float x) {
 
 
 
+
 vector<pair<double, double>> couple(
     int n
 ){
