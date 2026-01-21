@@ -16,6 +16,13 @@ float hasard() {
     return (float)rand();
 } // fonction nombre aleatoire pour mes coefs
 
+float hasard100() {
+    float x;
+    x= (float)rand()/RAND_MAX;
+    x=100*x;
+    return x;
+}
+
 float racine(float x) {
     return sqrt(x);
 }
@@ -31,8 +38,8 @@ vector<pair<double, double>> couple(
 
     //maintenant le generateur
     for (int i=0; i<n; i++){
-        double x = hasard();
-        double y = hasard();
+        double x = hasard100();
+        double y = hasard100();
         result.emplace_back(x, y); //on range le couple cree
     }
     return result;
