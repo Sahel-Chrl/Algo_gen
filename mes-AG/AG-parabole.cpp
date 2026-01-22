@@ -1,14 +1,18 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <array>
 #include <utility>
 #include <cmath>
+#include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
 using namespace std;
+
 
 /* 
 notre objectif et de prendre des points au hasard dans R2 
 et de trouver la parabole pour laquelle la distance moyenne (verticale) des 
 points a la courbe est la plus faible
+Ma population d'individus va etre composé de 100 individus () qui s'amelioreront petit a petit
 */
 
 
@@ -41,6 +45,21 @@ vector<pair<double, double>> couple(
         double x = hasard100();
         double y = hasard100();
         result.emplace_back(x, y); //on range le couple cree
+    }
+    return result;
+}
+
+
+//on va creer ici notre population de paraboles
+vector<array<double, 3>> diff_coef(int n){
+    vector<array<double, 3>> result;
+    result.reserve(n);
+
+    for (int i=0; i<100; i++){
+        double x = hasard();
+        double y = hasard();
+        double z = hasard();
+        result.push_back({x, y, z});
     }
     return result;
 }
@@ -83,6 +102,36 @@ float d;
 }//on a calculer la distance moyenne
 
 
+int affiche(){
+    /*sf::RenderWindow window(sf::VideoMode(800, 600), "Graph of f(x)");
+
+    // Créer un tableau de points
+    sf::VertexArray points(sf::LinesStrip);
+
+    // Remplir les points avec les valeurs de la fonction
+    for (double x = -400; x < 400; x++) {
+        double y = f(x * 0.01) * 100;  // Transformation pour adapter à la fenêtre
+        points.append(sf::Vertex(sf::Vector2f(x + 400, 300 - y), sf::Color::Red));  // Déplacement des points
+    }
+
+    // Boucle principale
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear(sf::Color::White);
+        window.draw(points);  // Dessiner la courbe
+        window.display();
+    }
+
+    return 0;*/
+
+    //truc de chatgpt mais ça sert a rien de juste le copier donc j'attends de bien comprendre
+    return 0;
+}
 
 int main(){
     int n;
@@ -93,8 +142,8 @@ int main(){
     auto points = couple(n);
     if (n<5){
         cout<< "Voici les points pris" <<endl;
-        for (const auto& [x, y] : points){
-        cout<< "("<<x<<","<<y<<")"<<endl<<endl;
+        for (const auto& [t, w] : points){
+        cout<< "("<<t<<","<<w<<")"<<endl<<endl;
         }
     }
     else {
@@ -103,6 +152,14 @@ int main(){
         cout<< "("<<x<<","<<y<<")"<<endl<<endl;*/
         cout << "Beaucoup de points donc je ne les affiches pas." << endl<<endl;
     }
+
+    //appel d'une liste de triplets pour la parabole
+    auto triplets = diff_coef(n);
+    // afficher les triplets
+    for (const auto& [x, y, z] : triplets){ 
+        cout<<"Triplet: ("<<x<<","<<y<<","<<z<<")"<<endl;
+    }
+
 
     float d=distancemoy(n);
     cout << "Voici la distance moyenne (verticale) entre les points et la courbe :  " << d <<endl;
