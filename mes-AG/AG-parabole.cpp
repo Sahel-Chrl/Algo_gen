@@ -7,7 +7,7 @@ using namespace std;
 
 /* 
 notre objectif et de prendre des points au hasard dans R2 
-et de trouver la parabole pour laquelle la distance moyenne des 
+et de trouver la parabole pour laquelle la distance moyenne (verticale) des 
 points a la courbe est la plus faible
 */
 
@@ -64,22 +64,23 @@ float valeur(float x) {
 
 
 double distance(float z, float t) {
-    float y,x,d,l;
-    x=hasard();
-    y = valeur(x);
-    d= racine((x-z)*(x-z)+(y-t)*(y-t));
-    l=d;
-    for (int i=1; i<=1000; i++){
-        if (d>=l){
-            x=hasard();
-            d=racine((x-z)*(x-z)+(y-t)*(y-t));
-        }
-        else {
-            l=d;
-        }
-    }// bof j'aproxime la distance min mais il me manque un truc la
+    float y,d;
+    y= valeur(z);
+    d= racine((y-t)*(y-t));
     return d;
-}
+} //on calcule ici la distance verticale du point z,t a la courbe
+
+
+float distancemoy(int n){
+float d;
+   d=0;
+   auto points = couple(n);
+   for (const auto& [z, t] : points){
+    d=d+distance(z,t);
+   }
+   d=d/n;
+   return d;
+}//on a calculer la distance moyenne
 
 
 
@@ -102,15 +103,9 @@ int main(){
         cout<< "("<<x<<","<<y<<")"<<endl<<endl;*/
         cout << "Beaucoup de points donc je ne les affiches pas." << endl<<endl;
     }
-    
 
-   float d; //on va calculer la distance moyenne
-   d=0;
-   for (const auto& [z, t] : points){
-    d=d+distance(z,t);
-   }
-   d=d/n;
-   cout << "Voici la distance moyenne entre les points et la courbe :  " << d <<endl;
+    float d=distancemoy(n);
+    cout << "Voici la distance moyenne (verticale) entre les points et la courbe :  " << d <<endl;
 
     return 0;
 }
