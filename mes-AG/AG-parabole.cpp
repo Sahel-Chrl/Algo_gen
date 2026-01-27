@@ -4,7 +4,7 @@
 #include <array>
 #include <utility>
 #include <cmath>
-#include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
+//#include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
 using namespace std;
 
 
@@ -20,10 +20,10 @@ float hasard() {
     return (float)rand();
 } // fonction nombre aleatoire pour mes coefs
 
-float hasard100() {
+float hasard100() { //float aleatoire -100 100.
     float x;
     x= (float)rand()/RAND_MAX;
-    x=100*x;
+    x=200*x-100; 
     return x;
 }
 
@@ -32,12 +32,13 @@ float racine(float x) {
 }
 
 
+typedef vector<pair<double, double>> points;
 
 
-vector<pair<double, double>> couple(
+points couple(
     int n
 ){
-    vector<pair<double, double>> result;
+    points result;
     result.reserve(n); //on a cree "l'emplacement" pour nos vecteur qu'on va ensuite generer
 
     //maintenant le generateur
@@ -51,51 +52,42 @@ vector<pair<double, double>> couple(
 
 
 //on va creer ici notre population de paraboles
-vector<array<double, 3>> diff_coef(int n){
+vector<array<double, 3>> create_coefs(int n){
     vector<array<double, 3>> result;
     result.reserve(n);
 
-    for (int i=0; i<100; i++){
-        double x = hasard();
-        double y = hasard();
-        double z = hasard();
+    for (int i=0; i<n; i++){
+        double x = hasard100();
+        double y = hasard100();
+        double z = hasard100();
         result.push_back({x, y, z});
     }
     return result;
 }
 
+typedef array<double,3> coefs;
 
-struct coefs {
-    float a,b,c;
-}; // je cree mes trois coefs pour la parabole
-
-
-coefs parabole() {
-    return{1.0f,2.0f,3.0f};
-}
-
-float valeur(float x) {
-    coefs d = parabole();
+float valeur(float x, coefs p) {
     float y;
-    y = d.a*x*x + d.b*x + d.c;
+    y = p[0]*x*x + p[1]*x + p[2];
     return y;
 }// fonction qui calcule la valeur en x
 
 
-double distance(float z, float t) {
+double distance(float z, float t, coefs p) {
     float y,d;
-    y= valeur(z);
-    d= racine((y-t)*(y-t));
+    y= valeur(z,p);
+    d= abs(y-t);
     return d;
 } //on calcule ici la distance verticale du point z,t a la courbe
 
 
-float distancemoy(int n){
+float distancemoy( coefs c, points p){
 float d;
+int n= p.size();
    d=0;
-   auto points = couple(n);
-   for (const auto& [z, t] : points){
-    d=d+distance(z,t);
+   for (auto point : p){
+    d=d+distance(point.first,point.second,c);
    }
    d=d/n;
    return d;
@@ -134,16 +126,18 @@ int affiche(){
 }
 
 int main(){
-    int n;
+    int n,m;
     cout << "Combien de point voulez vous ?"<<endl;
     cin>> n; 
+    cout << "Combien de paraboles ?"<<endl;
+    cin >>m;
 
     //appel d'une liste de couple
     auto points = couple(n);
     if (n<5){
         cout<< "Voici les points pris" <<endl;
-        for (const auto& [t, w] : points){
-        cout<< "("<<t<<","<<w<<")"<<endl<<endl;
+        for (const auto point : points){
+        cout<< "("<<point.first<<","<<point.second<<")"<<endl<<endl;
         }
     }
     else {
@@ -154,15 +148,14 @@ int main(){
     }
 
     //appel d'une liste de triplets pour la parabole
-    auto triplets = diff_coef(n);
+    auto triplets = create_coefs(m);
     // afficher les triplets
-    for (const auto& [x, y, z] : triplets){ 
-        cout<<"Triplet: ("<<x<<","<<y<<","<<z<<")"<<endl;
+    for ( auto parabole : triplets){ 
+        cout<<"Triplet: ("<<parabole[0]<<","<<parabole[1]<<","<<parabole[2]<<")"<<endl;
+        cout<<"Distance moyenne : "<< distancemoy(parabole, points)<<endl<<endl;
+
     }
 
-
-    float d=distancemoy(n);
-    cout << "Voici la distance moyenne (verticale) entre les points et la courbe :  " << d <<endl;
 
     return 0;
 }
