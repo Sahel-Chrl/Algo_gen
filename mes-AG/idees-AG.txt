@@ -1,3 +1,4 @@
 - chercher le chemin le plus court entre deux points.
-- optimisation des trajet delivraison des camions
--
+- optimisation des trajet delivraison des camions.
+- Trouver la parabole dont la distance a des points choisis aléatoirement est la minimum.
+- Trouver le polynome dont la distance a des points choisis aléatoirement est la minimum.
