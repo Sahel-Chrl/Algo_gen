@@ -9,7 +9,7 @@ using namespace std;
 
 /*
 notre objectif et de prendre des points au hasard dans R2
-et de trouver la parabole pour laquelle la distance moyenne (verticale) des
+et de trouver la parab pour laquelle la distance moyenne (verticale) des
 points a la courbe est la plus faible
 Ma popuulation d'individus va etre composé de 100 individus () qui s'amelioreront petit a petit
 */
@@ -45,9 +45,11 @@ float racine(float x)
 	return sqrt(x);
 }
 
-typedef vector<pair<float, float>> points;
+typedef vector<pair<float, float>> points; 
 typedef array<float, 3> parab;
 
+
+//fonction qui crée les couples de points
 points couple(
 	int n)
 {
@@ -64,7 +66,7 @@ points couple(
 	return result;
 }
 
-// on va creer ici notre popuulation de paraboles
+// on va creer ici notre popuulation de parabs
 vector<parab> create_parab(int n)
 {
 	vector<parab> result;
@@ -80,21 +82,25 @@ vector<parab> create_parab(int n)
 	return result;
 }
 
+// fonction qui calcule la valeur en x
 float valeur(float x, parab p)
 {
 	float y;
 	y = p[0] * x * x + p[1] * x + p[2];
 	return y;
-} // fonction qui calcule la valeur en x
+} 
 
-float distance(float z, float t, parab p)
+
+//fonction distance verticale
+float distance(float abcisse, float ordonnee, parab parab)
 {
 	float y, d;
-	y = valeur(z, p);
-	d = abs(y - t);
+	y = valeur(abcisse, parab);
+	d = abs(y - ordonnee);
 	return d;
-} // on calcule ici la distance verticale du point z,t a la courbe
+} 
 
+//fonction distance moyenne
 float distancemoy(parab c, points p)
 {
 	float d;
@@ -106,13 +112,14 @@ float distancemoy(parab c, points p)
 	}
 	d = d / n;
 	return d;
-} // on a calculer la distance moyenne
+}
 
+// fonction qui prends les scores des parabs et les transforme en probas
 vector<float> score2proba(vector<float> scores)
-{ // fonction qui prends les scores des paraboles et les transforme en probas
+{ 
 	vector<float> probas;
 	float somme = 0;
-	for (auto score : scores)
+	for (auto score : scores) //plus le score est grand moins il aura de chance d'être pris (on veut la distance min)
 	{
 		float inverse = 1 / score;
 		probas.push_back(inverse);
@@ -123,6 +130,7 @@ vector<float> score2proba(vector<float> scores)
 		cout << "attention somme nulle" << endl;
 		return probas;
 	}
+
 	// on normalise notre tableaux de probas pour que la somme fasse 1
 	for (int i = 0; i < probas.size(); i++)
 	{
@@ -131,6 +139,7 @@ vector<float> score2proba(vector<float> scores)
 	return probas;
 }
 
+//on fait juste la somme des probas pour les 
 vector<float> probas2cumul(vector<float> probas)
 {
 	vector<float> cumul;
@@ -142,6 +151,7 @@ vector<float> probas2cumul(vector<float> probas)
 	return cumul;
 }
 
+//fonction qui prend au hasard un nombre entre 0 et 1 et revoie la position de ce nombre dans cumul (renvoi quel individu c'est)
 int echantillon(vector<float> cumul)
 {
 	float r = hasard1();
@@ -161,25 +171,51 @@ int echantillon(vector<float> cumul)
 	return debut;
 }
 
-parab descendant(parab mere, float variance)
+
+//fonction qui crée un descendant en fonction d'un parent choisi, c'est surement ici qu'on peut encore ameliorer le code
+parab descendant(parab mere, float variance) 
 {
 	parab enfant;
 	for (int i = 0; i < mere.size(); i++)
 	{
-		enfant[i] = mere[i] + variance * hasard1Neg();
+		enfant[i] = mere[i] + variance; //enfant + mutation
 	}
 	return enfant;
-}
+} // je pourrais changer cette fonction pour moins changer le x carre que la constante ? 
 
-float minVec(vector<float> vec){
-	float min=vec[0];
-	for (int i=0; i<vec.size(); i++){
-		if (vec[i]<min){
-			min=vec[i];
+//fonction qui prend les scores d'une population et donne la distance minimale parmis ces scores 
+float minVec(vector<float> scores){
+	float min=scores[0];
+	for (int i=0; i<scores.size(); i++){
+		if (scores[i]<min){
+			min=scores[i];
 		}
 	}
 	return min;
 }
+
+
+//fonction qui va calculer le score moyen pour ensuie avoir une meilleur estimation de la variance
+float scoreMoyen (vector<float> scores){
+    float moy;
+    moy = 0;
+    for (int i=0; i<scores.size(); i++){
+        moy = moy + scores[i];
+    }
+    moy=moy/scores.size();
+    return moy;
+}
+
+//fonction qui passe de la moyenne a la variance la "mieux"
+//si un individu a un meilleur score que la moyenne on lui octroie une petite variance, et inversement
+float moy2variance (float moy, vector<float> scores, int numero) {
+    float variance;
+    float pourcent=moy/100; //on calcule 1 pourcent de la moyenne pour avoir une variance approprié au score moyen des individus
+    variance = (scores[numero]/moy) *pourcent; // je pondere la variance a la distance au score moyen
+    variance = variance * hasard1Neg();
+    return variance;
+}
+
 
 int affiche()
 {
@@ -219,8 +255,7 @@ int main()
 	int n, m;
 	cout << "Combien de point voulez vous ?" << endl;
 	cin >> n;
-	cout << "Combien de paraboles ?" << endl;
-	cin >> m;
+	
 
 	// appel d'une liste de couple
 	auto points = couple(n);
@@ -235,27 +270,29 @@ int main()
 	}
 	else
 	{
-		/*cout << "Voici quelques points pris" <<endl;
-		for (const auto& [x, y] : points){
-		cout<< "("<<x<<","<<y<<")"<<endl<<endl;*/
 		cout << "Beaucoup de points donc je ne les affiches pas." << endl
 			 << endl;
 	}
 
-	// appel d'une liste de popu pour la parabole
+	cout << "Combien de paraboles ?" << endl;
+	cin >> m;
+
+	// appel d'une liste de paraboles pour la population
 	auto popu = create_parab(m);
+
+	
 	vector<float> scores;
-	for (auto parabole : popu)
+	for (auto parab : popu)
 	{
-		scores.push_back(distancemoy(parabole, points));
+		scores.push_back(distancemoy(parab, points));
 	}
 	vector<float> probas = score2proba(scores);
 
 	// afficher les popu
 	int i = 0;
-	for (auto parabole : popu)
+	for (auto parab : popu)
 	{
-		cout << "Triplet: (" << parabole[0] << "," << parabole[1] << "," << parabole[2] << ")" << endl;
+		cout << "Triplet: (" << parab[0] << "," << parab[1] << "," << parab[2] << ")" << endl;
 		cout << "Distance moyenne : " << scores[i] << endl;
 		cout << "proba de reproduction :" << probas[i] << endl
 			 << endl;
@@ -277,20 +314,25 @@ int main()
 	int generations;
 	cout << "combien de generations veux tu ?" << endl;
 	cin >> generations;
+    cout << endl <<endl;
+
+
+	//boucle principale du programme qui utilise les fonctions pour ameliorer la population
 	for (int i = 0; i < generations; i++)
 	{
 		vector<parab> newPop;
 		vector<float> scores;
-		for (auto parabole : popu)
+		for (auto parab : popu) // on remplit notre tableau de score pour une population
 		{
-			scores.push_back(distancemoy(parabole, points));
+			scores.push_back(distancemoy(parab, points));
 		}
 		vector<float> probas = score2proba(scores);
-		vector<float> cumul = probas2cumul(probas);
-		for(int j=0; j<popu.size(); j++){
+		vector<float> cumul = probas2cumul(probas); //on a transforme nos scores en probas et nos probas en cumul
+        float moyenne = scoreMoyen(scores);
+		for(int j=0; j<popu.size(); j++){ //on cree une nouvelle population du même nombre d'individu que la precedente
 				int indiv=echantillon(cumul);
-				float variance=10;
-				if(scores[indiv]/100<10){variance=scores[indiv]/100;}
+				float variance;
+                variance = moy2variance(moyenne, scores, j);
 				parab enfant=descendant(popu[indiv],variance);
 				newPop.push_back(enfant);
 		}
@@ -300,3 +342,6 @@ int main()
 	}
 	return 0;
 }
+
+//plus on diminue la variance, plus la population s'ameliore lentement mais le passage d'une bonne generation a une mauvaise se fait rare.
+//en prenant peu de points 1 seul par exemple, on se rends encore plus compte de l'efficacité du programme
