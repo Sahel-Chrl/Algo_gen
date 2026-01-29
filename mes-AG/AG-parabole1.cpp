@@ -7,6 +7,8 @@
 // #include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
 using namespace std;
 
+//DANS CET ALGORITHME ON VA ESSAYER D'AMELIORER LA VARIANCE EN LA PONDERANT A LA QUALITÉ DE L'INDIVIDU AINSI QU'A LA DISTANE MOYENNE PLUS OU MOINS GRANDE.
+
 /*
 notre objectif et de prendre des points au hasard dans R2
 et de trouver la parab pour laquelle la distance moyenne (verticale) des
