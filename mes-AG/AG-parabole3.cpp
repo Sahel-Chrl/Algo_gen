@@ -4,7 +4,9 @@
 #include <array>
 #include <utility>
 #include <cmath>
-// #include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
+#include <algorithm>
+#include <SFML/Graphics.hpp>  // Nécessaire pour RenderWindow
+using namespace sf;
 using namespace std;
 
 /*
@@ -46,7 +48,7 @@ float racine(float x)
 }
 
 typedef vector<pair<float, float>> points; 
-typedef array<float, 3> parab;
+typedef vector<float> parab;
 
 
 //fonction qui crée les couples de points
@@ -67,32 +69,35 @@ points couple(
 }
 
 // on va creer ici notre popuulation de parabs
-vector<parab> create_parab(int n)
+vector<parab> create_parab(int n, int degre)
 {
 	vector<parab> result;
-	result.reserve(n);
 
 	for (int i = 0; i < n; i++)
 	{
-		float x = hasard100Neg();
-		float y = hasard100Neg();
-		float z = hasard100Neg();
-		result.push_back({x, y, z});
+        parab par;
+		for (int j=0; j<degre; j++){
+                par.push_back(hasard1Neg()*10);
+        }
+		result.push_back(par);
 	}
 	return result;
 }
 
 // fonction qui calcule la valeur en x
-float valeur(float x, parab p)
+float valeur(float x, const parab& p)
 {
-	float y;
-	y = p[0] * x * x + p[1] * x + p[2];
+	float y=0;
+	//y = p[0] * x * x + p[1] * x + p[2];
+    for (int i=0; i<p.size(); i++ ){
+        y=y*x+p[i];
+    }
 	return y;
 } 
 
 
 //fonction distance verticale
-float distance(float abcisse, float ordonnee, parab parab)
+float distance(float abcisse, float ordonnee, const parab &parab)
 {
 	float y, d;
 	y = valeur(abcisse, parab);
@@ -101,7 +106,7 @@ float distance(float abcisse, float ordonnee, parab parab)
 } 
 
 //fonction distance moyenne
-float distancemoy(parab c, points p)
+float distancemoy(const parab& c, points p)
 {
 	float d;
 	int n = p.size();
@@ -173,19 +178,25 @@ int echantillon(vector<float> cumul)
 
 
 //fonction qui crée un descendant en fonction d'un parent choisi, c'est surement ici qu'on peut encore ameliorer le code
-parab descendant(parab mere, float variance) 
+parab descendant(const parab& mere, float variance) 
 {
 	parab enfant;
-	
 	for (int i = 0; i < mere.size(); i++)
 	{	float hasard=hasard1Neg();
-		enfant[i] =mere[i] + mere[i] * variance * hasard; //enfant + mutation
+		float newVar;
+		newVar=max(abs(mere[i])*variance,0.000001f);
+		enfant.push_back(mere[i] + newVar * hasard); //enfant + mutation
+		
 	}
 	return enfant;
 } // je pourrais changer cette fonction pour moins changer le x carre que la constante ? 
 
 //fonction qui prend les scores d'une population et donne la distance minimale parmis ces scores 
 float minVec(vector<float> scores){
+    if(scores.size()==0){
+        cout<<"scores vide, erreur"<<endl;
+        return 0.;
+    }
 	float min=scores[0];
 	for (int i=0; i<scores.size(); i++){
 		if (scores[i]<min){
@@ -209,46 +220,87 @@ float scoreMoyen (vector<float> scores){
 
 
 
-int affiche()
+void affiche(const vector<parab> &popu, points& pts){
+
+// Fenêtre SFML 3 : VideoMode prend un Vector2u
+    RenderWindow window(
+        VideoMode(Vector2u(600, 600)),
+        "Courbe avec SFML 3"
+    );
+    window.setFramerateLimit(60);
+
+
+   const std::size_t pointCount = 200;
+   vector<VertexArray> curves;
+   for(auto par : popu){
+   VertexArray curve(PrimitiveType::LineStrip, pointCount);
+
+    for (std::size_t i = 0; i < pointCount; ++i)
+    {
+        float x = (float)i-100;
+        float y = valeur(x,par);
+
+        curve[i].position = { (x+100)*3, (y+100)*3 };
+        curve[i].color = Color::Green;
+    }
+	curves.push_back(curve);
+}
+//points
+const float radius = 3.f;
+vector<CircleShape> dots;
+for (auto point : pts)
 {
-	/*sf::RenderWindow window(sf::VideoMode(800, 600), "Graph of f(x)");
+    CircleShape dot(radius);
+    dot.setFillColor(Color::Red);
+    dot.setOrigin({radius, radius});
+    dot.setPosition({(point.first+100)*3, (point.second+100)*3});
+    dots.push_back(dot);
+}
 
-	// Créer un tableau de points
-	sf::VertexArray points(sf::LinesStrip);
+    VertexArray axes(PrimitiveType::Lines, 4);
 
-	// Remplir les points avec les valeurs de la fonction
-	for (float x = -400; x < 400; x++) {
-		float y = f(x * 0.01) * 100;  // Transformation pour adapter à la fenêtre
-		points.append(sf::Vertex(sf::Vector2f(x + 400, 300 - y), sf::Color::Red));  // Déplacement des points
-	}
+// Axe X
+axes[0].position = {0.f, 300.f};
+axes[1].position = {600.f, 300.f};
 
-	// Boucle principale
-	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+// Axe Y
+axes[2].position = {300.f, 0.f};
+axes[3].position = {300.f, 600.f};
 
-		window.clear(sf::Color::White);
-		window.draw(points);  // Dessiner la courbe
-		window.display();
-	}
+for (int i = 0; i < 4; ++i)
+    axes[i].color = Color(150, 150, 150);
 
-	return 0;*/
 
-	// truc de chatgpt mais ça sert a rien de juste le copier donc j'attends de bien comprendre
-	return 0;
+ while (window.isOpen())
+    {
+        // SFML 3 : pollEvent() -> std::optional<Event>
+        while (auto ev = window.pollEvent())
+        {
+            // SFML 3 : event est une variante (std::variant-like)
+            if (ev->is<Event::Closed>())
+                window.close();
+        }
+
+window.clear(Color::Black);
+window.draw(axes);
+for (const auto& p : dots)
+    window.draw(p);
+for( auto curve : curves ) window.draw(curve);
+window.display();
+}
 }
 
 int main()
 {
+
+
 	srand(time(NULL));
 	int n, m;
 	cout << "Combien de point voulez vous ?" << endl;
 	cin >> n;
-	
-
+    int deg=(int)(n/2);
+	if(deg==0) deg=1;
+    cout<<"le degre des polynomes est : "<<deg-1<<endl;
 	// appel d'une liste de couple
 	auto points = couple(n);
 	if (n < 5)
@@ -270,7 +322,7 @@ int main()
 	cin >> m;
 
 	// appel d'une liste de paraboles pour la population
-	auto popu = create_parab(m);
+	auto popu = create_parab(m,deg);
 
 	
 	vector<float> scores;
@@ -281,7 +333,7 @@ int main()
 	vector<float> probas = score2proba(scores);
 
 	// afficher les popu
-	int i = 0;
+	/*int i = 0;
 	for (auto parab : popu)
 	{
 		cout << "Triplet: (" << parab[0] << "," << parab[1] << "," << parab[2] << ")" << endl;
@@ -289,7 +341,7 @@ int main()
 		cout << "proba de reproduction :" << probas[i] << endl
 			 << endl;
 		i++;
-	}
+	}*/
 
 	// on va tester l'echantillonage
 	/*int nb_echant;
@@ -308,7 +360,7 @@ int main()
 	cin >> generations;
     cout << endl <<endl;
 
-
+	affiche(popu, points);
 	//boucle principale du programme qui utilise les fonctions pour ameliorer la population
 	for (int i = 0; i < generations; i++)
 	{
@@ -323,6 +375,7 @@ int main()
 		for(int j=0; j<popu.size(); j++){ //on cree une nouvelle population du même nombre d'individu que la precedente
 				int indiv=echantillon(cumul);
 				float variance=.05;
+                if(indiv>=popu.size()) cout<<"erreur: indiv "<<indiv<<" dans popu "<<popu.size()<<endl;
 				parab enfant=descendant(popu[indiv],variance);
 				newPop.push_back(enfant);
 		}
@@ -330,6 +383,7 @@ int main()
 		cout<<minVec(scores)<<" "<<scoreMoyen(scores)<<endl;
 		
 	}
+	affiche(popu, points);
 	return 0;
 }
 
