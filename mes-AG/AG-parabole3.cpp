@@ -77,7 +77,10 @@ vector<parab> create_parab(int n, int degre)
 	{
         parab par;
 		for (int j=0; j<degre; j++){
-                par.push_back(hasard1Neg()*10);
+			if (j==degre-1){
+                par.push_back(hasard1Neg()*100);
+			}
+			else {par.push_back(hasard1Neg()*3);}
         }
 		result.push_back(par);
 	}
@@ -230,12 +233,12 @@ void affiche(const vector<parab> &popu, points& pts){
     window.setFramerateLimit(60);
 
 
-   const std::size_t pointCount = 200;
+   const size_t pointCount = 200;
    vector<VertexArray> curves;
    for(auto par : popu){
    VertexArray curve(PrimitiveType::LineStrip, pointCount);
 
-    for (std::size_t i = 0; i < pointCount; ++i)
+    for (size_t i = 0; i < pointCount; ++i)
     {
         float x = (float)i-100;
         float y = valeur(x,par);
@@ -323,6 +326,15 @@ int main()
 
 	// appel d'une liste de paraboles pour la population
 	auto popu = create_parab(m,deg);
+	if (m<11&deg>1){
+		int i=1;
+		cout <<"voici un exemple du premier et deuxième coefficient de quelques paraboles:"<<endl;
+		for (auto parab : popu){
+			cout << " - parabole "<<i<< ": coef 1 = "<<parab[deg-1]<<endl<<"coef 2 = "<<parab[deg-2]<<endl;
+			i++;
+		}
+	}
+	
 
 	
 	vector<float> scores;
@@ -374,7 +386,7 @@ int main()
 		vector<float> cumul = probas2cumul(probas); //on a transforme nos scores en probas et nos probas en cumul
 		for(int j=0; j<popu.size(); j++){ //on cree une nouvelle population du même nombre d'individu que la precedente
 				int indiv=echantillon(cumul);
-				float variance=.05;
+				float variance=.03;
                 if(indiv>=popu.size()) cout<<"erreur: indiv "<<indiv<<" dans popu "<<popu.size()<<endl;
 				parab enfant=descendant(popu[indiv],variance);
 				newPop.push_back(enfant);
