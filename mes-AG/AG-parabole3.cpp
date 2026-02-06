@@ -76,12 +76,13 @@ vector<parab> create_parab(int n, int degre)
 	for (int i = 0; i < n; i++)
 	{
         parab par;
+		int p=0;
 		for (int j=0; j<degre; j++){
-			if (j==degre-1){
-                par.push_back(hasard1Neg()*100);
-			}
-			else {par.push_back(hasard1Neg()*3);}
-        }
+			p=40*degre;
+			for (int i=0;i<=j; i++)p=p-40;
+			if(p==0)p=1;
+            par.push_back(hasard1Neg()*100/p);
+		}
 		result.push_back(par);
 	}
 	return result;
@@ -344,28 +345,6 @@ int main()
 	}
 	vector<float> probas = score2proba(scores);
 
-	// afficher les popu
-	/*int i = 0;
-	for (auto parab : popu)
-	{
-		cout << "Triplet: (" << parab[0] << "," << parab[1] << "," << parab[2] << ")" << endl;
-		cout << "Distance moyenne : " << scores[i] << endl;
-		cout << "proba de reproduction :" << probas[i] << endl
-			 << endl;
-		i++;
-	}*/
-
-	// on va tester l'echantillonage
-	/*int nb_echant;
-		cout<<"combien d'echantillons ?"<<endl;
-		cin >> nb_echant;
-		vector<float> cumul;
-		cumul=probas2cumul(probas);
-		for (int i=0; i<nb_echant; i++){
-			cout << echantillon(cumul) <<" ";
-		}
-		cout<<endl;
-		return 0;*/
 
 	int generations;
 	cout << "combien de generations veux tu ?" << endl;
