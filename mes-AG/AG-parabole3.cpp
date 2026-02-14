@@ -207,7 +207,7 @@ Parabole* descendant(const Parabole* mere, double variance, const vector<double>
 	double newVar=variance;
 	Color newCol=mere->couleur;
 	if(hasard1()<.02){ 
-		 newVar=20*variance; //grosse mutation
+		 newVar=40*variance; //grosse mutation
 		newCol=random_col();
 	}
 
