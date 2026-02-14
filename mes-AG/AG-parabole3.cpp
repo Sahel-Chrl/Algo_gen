@@ -16,39 +16,39 @@ points a la courbe est la plus faible
 Ma popuulation d'individus va etre composé de 100 individus () qui s'amelioreront petit a petit
 */
 
-float hasard()
+double hasard()
 {
-	return (float)rand();
+	return (double)rand();
 } // fonction nombre aleatoire pour mes parab
 
-float hasard1()
-{ // float aleatoire -100 100.
-	float x;
-	x = (float)rand() / RAND_MAX;
+double hasard1()
+{ // double aleatoire -100 100.
+	double x;
+	x = (double)rand() / RAND_MAX;
 	return x;
 }
 
-float hasard1Neg()
-{ // float aleatoire -100 100.
-	float x;
+double hasard1Neg()
+{ // double aleatoire -100 100.
+	double x;
 	x = 2 * hasard1() - 1;
 	return x;
 }
 
-float hasard100Neg()
-{ // float aleatoire -100 100.
-	float x = hasard1();
+double hasard100Neg()
+{ // double aleatoire -100 100.
+	double x = hasard1();
 	x = 200 * x - 100;
 	return x;
 }
 
-float racine(float x)
+double racine(double x)
 {
 	return sqrt(x);
 }
 
-typedef vector<pair<float, float>> points; 
-typedef vector<float> parab;
+typedef vector<pair<double, double>> points; 
+typedef vector<double> parab;
 
 
 //fonction qui crée les couples de points
@@ -61,8 +61,8 @@ points couple(
 	// maintenant le generateur
 	for (int i = 0; i < n; i++)
 	{
-		float x = hasard100Neg();
-		float y = hasard100Neg();
+		double x = hasard100Neg();
+		double y = hasard100Neg();
 		result.emplace_back(x, y); // on range le couple cree
 	}
 	return result;
@@ -73,15 +73,17 @@ vector<parab> create_parab(int n, int degre)
 {
 	vector<parab> result;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)//je parcours les courbes
 	{
         parab par;
-		int p=0;
+
 		for (int j=0; j<degre; j++){
-			p=40*degre;
-			for (int i=0;i<=j; i++)p=p-40;
-			if(p==0)p=1;
-            par.push_back(hasard1Neg()*100/p);
+			double x;
+			x=hasard100Neg();
+			for ( int k=j+1; k<degre ; k++){
+				x=x/100;
+			}
+			par.push_back(x);
 		}
 		result.push_back(par);
 	}
@@ -89,9 +91,9 @@ vector<parab> create_parab(int n, int degre)
 }
 
 // fonction qui calcule la valeur en x
-float valeur(float x, const parab& p)
+double valeur(double x, const parab& p)
 {
-	float y=0;
+	double y=0;
 	//y = p[0] * x * x + p[1] * x + p[2];
     for (int i=0; i<p.size(); i++ ){
         y=y*x+p[i];
@@ -101,18 +103,18 @@ float valeur(float x, const parab& p)
 
 
 //fonction distance verticale
-float distance(float abcisse, float ordonnee, const parab &parab)
+double distance(double abcisse, double ordonnee, const parab &parab)
 {
-	float y, d;
+	double y, d;
 	y = valeur(abcisse, parab);
 	d = abs(y - ordonnee);
 	return d;
 } 
 
 //fonction distance moyenne
-float distancemoy(const parab& c, points p)
+double distancemoy(const parab& c, points p)
 {
-	float d;
+	double d;
 	int n = p.size();
 	d = 0;
 	for (auto point : p)
@@ -124,13 +126,13 @@ float distancemoy(const parab& c, points p)
 }
 
 // fonction qui prends les scores des parabs et les transforme en probas
-vector<float> score2proba(vector<float> scores)
+vector<double> score2proba(vector<double> scores)
 { 
-	vector<float> probas;
-	float somme = 0;
+	vector<double> probas;
+	double somme = 0;
 	for (auto score : scores) //plus le score est grand moins il aura de chance d'être pris (on veut la distance min)
 	{
-		float inverse = 1 / score;
+		double inverse = 1 / score;
 		probas.push_back(inverse);
 		somme += inverse;
 	}
@@ -149,9 +151,9 @@ vector<float> score2proba(vector<float> scores)
 }
 
 //on fait juste la somme des probas pour les 
-vector<float> probas2cumul(vector<float> probas)
+vector<double> probas2cumul(vector<double> probas)
 {
-	vector<float> cumul;
+	vector<double> cumul;
 	cumul.push_back(0);
 	for (int i = 0; i < probas.size(); i++)
 	{
@@ -161,9 +163,9 @@ vector<float> probas2cumul(vector<float> probas)
 }
 
 //fonction qui prend au hasard un nombre entre 0 et 1 et revoie la position de ce nombre dans cumul (renvoi quel individu c'est)
-int echantillon(vector<float> cumul)
+int echantillon(vector<double> cumul)
 {
-	float r = hasard1();
+	double r = hasard1();
 	int debut = 0, fin = cumul.size() - 1;
 	while (fin - debut > 1)
 	{
@@ -182,26 +184,24 @@ int echantillon(vector<float> cumul)
 
 
 //fonction qui crée un descendant en fonction d'un parent choisi, c'est surement ici qu'on peut encore ameliorer le code
-parab descendant(const parab& mere, float variance) 
+parab descendant(const parab& mere, double variance) 
 {
 	parab enfant;
 	for (int i = 0; i < mere.size(); i++)
-	{	float hasard=hasard1Neg();
-		float newVar;
-		newVar=max(abs(mere[i])*variance,0.000001f);
-		enfant.push_back(mere[i] + newVar * hasard); //enfant + mutation
+	{	double hasard=hasard1Neg();
+		enfant.push_back(mere[i] + variance * hasard * mere[i]); //enfant + mutation
 		
 	}
 	return enfant;
 } // je pourrais changer cette fonction pour moins changer le x carre que la constante ? 
 
 //fonction qui prend les scores d'une population et donne la distance minimale parmis ces scores 
-float minVec(vector<float> scores){
+double minVec(vector<double> scores){
     if(scores.size()==0){
         cout<<"scores vide, erreur"<<endl;
         return 0.;
     }
-	float min=scores[0];
+	double min=scores[0];
 	for (int i=0; i<scores.size(); i++){
 		if (scores[i]<min){
 			min=scores[i];
@@ -212,8 +212,8 @@ float minVec(vector<float> scores){
 
 
 //fonction qui va calculer le score moyen pour ensuie avoir une meilleur estimation de la variance
-float scoreMoyen (vector<float> scores){
-    float moy;
+double scoreMoyen (vector<double> scores){
+    double moy;
     moy = 0;
     for (int i=0; i<scores.size(); i++){
         moy = moy + scores[i];
@@ -257,7 +257,7 @@ for (auto point : pts)
     CircleShape dot(radius);
     dot.setFillColor(Color::Red);
     dot.setOrigin({radius, radius});
-    dot.setPosition({(point.first+100)*3, (point.second+100)*3});
+    dot.setPosition({((float)point.first+100)*3, ((float)point.second+100)*3});
     dots.push_back(dot);
 }
 
@@ -297,14 +297,17 @@ window.display();
 int main()
 {
 
-
+	int nb_checkpoint=10;
 	srand(time(NULL));
 	int n, m;
 	cout << "Combien de point voulez vous ?" << endl;
 	cin >> n;
-    int deg=(int)(n/2);
-	if(deg==0) deg=1;
-    cout<<"le degre des polynomes est : "<<deg-1<<endl;
+cout<<"combien de coefs veux tu pour les polynomes ?"<<endl;
+int deg;
+cin >>deg;
+    //int deg=(int)(n/2);
+	//if(deg==0) deg=1;
+    //cout<<"le degre des polynomes est : "<<deg-1<<endl;
 	// appel d'une liste de couple
 	auto points = couple(n);
 	if (n < 5)
@@ -338,12 +341,12 @@ int main()
 	
 
 	
-	vector<float> scores;
+	vector<double> scores;
 	for (auto parab : popu)
 	{
 		scores.push_back(distancemoy(parab, points));
 	}
-	vector<float> probas = score2proba(scores);
+	vector<double> probas = score2proba(scores);
 
 
 	int generations;
@@ -353,25 +356,28 @@ int main()
 
 	affiche(popu, points);
 	//boucle principale du programme qui utilise les fonctions pour ameliorer la population
+	int distance_Checkpoint=(int)(generations/nb_checkpoint);
 	for (int i = 0; i < generations; i++)
 	{
 		vector<parab> newPop;
-		vector<float> scores;
+		vector<double> scores;
 		for (auto parab : popu) // on remplit notre tableau de score pour une population
 		{
 			scores.push_back(distancemoy(parab, points));
 		}
-		vector<float> probas = score2proba(scores);
-		vector<float> cumul = probas2cumul(probas); //on a transforme nos scores en probas et nos probas en cumul
+		vector<double> probas = score2proba(scores);
+		vector<double> cumul = probas2cumul(probas); //on a transforme nos scores en probas et nos probas en cumul
 		for(int j=0; j<popu.size(); j++){ //on cree une nouvelle population du même nombre d'individu que la precedente
 				int indiv=echantillon(cumul);
-				float variance=.03;
+				double variance=.1;
                 if(indiv>=popu.size()) cout<<"erreur: indiv "<<indiv<<" dans popu "<<popu.size()<<endl;
 				parab enfant=descendant(popu[indiv],variance);
 				newPop.push_back(enfant);
 		}
 		popu=newPop;
+		if (i%distance_Checkpoint==0){
 		cout<<minVec(scores)<<" "<<scoreMoyen(scores)<<endl;
+		}
 		
 	}
 	affiche(popu, points);
