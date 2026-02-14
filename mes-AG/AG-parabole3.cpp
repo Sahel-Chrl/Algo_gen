@@ -36,38 +36,38 @@ double hasard1Neg()
 	return x;
 }
 
-Color random_col(){
-		return Color(
-        static_cast<int>((int)(hasard1()*255)),
-        static_cast<int>((int)(hasard1()*255)),
-        static_cast<int>((int)(hasard1()*255))
-    );
+Color random_col()
+{
+	return Color(
+		static_cast<int>((int)(hasard1() * 255)),
+		static_cast<int>((int)(hasard1() * 255)),
+		static_cast<int>((int)(hasard1() * 255)));
 }
 
-class Parabole {
-	public:
+class Parabole
+{
+public:
 	vector<double> coefs;
 	Color couleur;
 
-	Parabole(int degre, const vector<double> &grandeurs){
-	for (int j = 0; j < degre; j++)
+	Parabole(int degre, const vector<double> &grandeurs)
+	{
+		for (int j = 0; j < degre; j++)
 		{
 			double x;
-			x = hasard1Neg()*grandeurs[j];
+			x = hasard1Neg() * grandeurs[j];
 			coefs.push_back(x);
 		}
 		couleur = random_col();
-
 	}
 
-	Parabole(vector <double> &coefficients, Color col){
-		for(auto c:coefficients) coefs.push_back(c);
-		couleur=col;
+	Parabole(vector<double> &coefficients, Color col)
+	{
+		for (auto c : coefficients)
+			coefs.push_back(c);
+		couleur = col;
 	}
 };
-
-
-
 
 double racine(double x)
 {
@@ -86,27 +86,25 @@ points couple(
 	// maintenant le generateur
 	for (int i = 0; i < n; i++)
 	{
-		double x = hasard1Neg()*100;
-		double y = hasard1Neg()*100;
+		double x = hasard1Neg() * 100;
+		double y = hasard1Neg() * 100;
 		result.emplace_back(x, y); // on range le couple cree
 	}
 	return result;
 }
 
 // on va creer ici notre popuulation de parabs
-vector<Parabole *> create_parab(int n, int degre, const vector<double> &grandeurs )
+vector<Parabole *> create_parab(int n, int degre, const vector<double> &grandeurs)
 {
 	vector<Parabole *> result;
 
 	for (int i = 0; i < n; i++) // je parcours les courbes
 	{
-		Parabole *par=new Parabole(degre, grandeurs);
+		Parabole *par = new Parabole(degre, grandeurs);
 		result.push_back(par);
 	}
 	return result;
 }
-
-
 
 // fonction qui calcule la valeur en x
 double valeur(double x, const Parabole *p)
@@ -201,14 +199,15 @@ int echantillon(vector<double> cumul)
 }
 
 // fonction qui crée un descendant en fonction d'un parent choisi, c'est surement ici qu'on peut encore ameliorer le code
-Parabole* descendant(const Parabole* mere, double variance, const vector<double> &grandeurs )
+Parabole *descendant(const Parabole *mere, double variance, const vector<double> &grandeurs)
 {
 	vector<double> enfantCoefs;
-	double newVar=variance;
-	Color newCol=mere->couleur;
-	if(hasard1()<.02){ 
-		 newVar=40*variance; //grosse mutation
-		newCol=random_col();
+	double newVar = variance;
+	Color newCol = mere->couleur;
+	if (hasard1() < .02)
+	{
+		newVar = 40 * variance; // grosse mutation
+		newCol = random_col();
 	}
 
 	for (int i = 0; i < mere->coefs.size(); i++)
@@ -217,7 +216,7 @@ Parabole* descendant(const Parabole* mere, double variance, const vector<double>
 
 		enfantCoefs.push_back(mere->coefs[i] + newVar * hasard * grandeurs[i]); // enfant + mutation
 	}
-	Parabole *enfant= new Parabole(enfantCoefs,newCol);
+	Parabole *enfant = new Parabole(enfantCoefs, newCol);
 	return enfant;
 } // je pourrais changer cette fonction pour moins changer le x carre que la constante ?
 
@@ -256,28 +255,12 @@ double scoreMoyen(vector<double> scores)
 int main()
 {
 
-
 	int nb_checkpoint = 100;
 	srand(time(NULL));
 	int n, m;
 	cout << "Combien de point voulez vous ?" << endl;
 	cin >> n;
-	cout << "combien de coefs veux tu pour les polynomes ?" << endl;
-	int deg;
-	cin >> deg;
-
-vector<double>grandeurs;
-grandeurs.resize(deg);
-double g=100;
-for( int d=0; d<deg; d++){
-	grandeurs[deg-d-1]=g;
-	g=g/100;
-}
-
-	// int deg=(int)(n/2);
-	// if(deg==0) deg=1;
-	// cout<<"le degre des polynomes est : "<<deg-1<<endl;
-	//  appel d'une liste de couple
+	n=n-1;
 	auto points = couple(n);
 	if (n < 5)
 	{
@@ -293,6 +276,24 @@ for( int d=0; d<deg; d++){
 		cout << "Beaucoup de points donc je ne les affiches pas." << endl
 			 << endl;
 	}
+
+	cout << "combien de coefs veux tu pour les polynomes ?" << endl;
+	int deg;
+	cin >> deg;
+
+	vector<double> grandeurs;
+	grandeurs.resize(deg);
+	double g = 100;
+	for (int d = 0; d < deg; d++)
+	{
+		grandeurs[deg - d - 1] = g;
+		g = g / 100;
+	}
+
+	// int deg=(int)(n/2);
+	// if(deg==0) deg=1;
+	// cout<<"le degre des polynomes est : "<<deg-1<<endl;
+	//  appel d'une liste de couple
 
 	cout << "Combien de paraboles ?" << endl;
 	cin >> m;
@@ -356,7 +357,7 @@ for( int d=0; d<deg; d++){
 		axes[i].color = Color(150, 150, 150);
 	int idGeneration = 0;
 
-	int numPopu=0;
+	int numPopu = 0;
 	while (window.isOpen())
 	{
 		// SFML 3 : pollEvent() -> std::optional<Event>
@@ -366,7 +367,8 @@ for( int d=0; d<deg; d++){
 			if (ev->is<Event::Closed>())
 				window.close();
 		}
-		if(idGeneration>=generations) continue;
+		if (idGeneration >= generations)
+			continue;
 		// boucle principale du programme qui utilise les fonctions pour ameliorer la population
 		int distance_Checkpoint = (int)(generations / nb_checkpoint);
 
@@ -388,7 +390,7 @@ for( int d=0; d<deg; d++){
 			newPop.push_back(enfant);
 		}
 		popu = newPop;
-		//if (idGeneration % distance_Checkpoint == 0)
+		// if (idGeneration % distance_Checkpoint == 0)
 		{
 			curves.clear();
 			for (auto par : popu)
@@ -405,7 +407,7 @@ for( int d=0; d<deg; d++){
 				}
 				curves.push_back(curve);
 			}
-			cout<<"Population numero "<<numPopu<<" : ";
+			cout << "Population numero " << numPopu << " : ";
 			numPopu++;
 			cout << minVec(scores) << " " << scoreMoyen(scores) << endl;
 			window.clear(Color::Black);
@@ -420,7 +422,7 @@ for( int d=0; d<deg; d++){
 		idGeneration++;
 	}
 
-return 0;
+	return 0;
 }
 
 // plus on diminue la variance, plus la population s'ameliore lentement mais le passage d'une bonne generation a une mauvaise se fait rare.
