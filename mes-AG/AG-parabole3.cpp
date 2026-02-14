@@ -81,7 +81,7 @@ points couple(
 	int n)
 {
 	points result;
-	result.reserve(n); // on a cree "l'emplacement" pour nos vecteur qu'on va ensuite generer
+	result.resize(n); // on a cree "l'emplacement" pour nos vecteur qu'on va ensuite generer
 
 	// maintenant le generateur
 	for (int i = 0; i < n; i++)
@@ -206,7 +206,7 @@ Parabole* descendant(const Parabole* mere, double variance, const vector<double>
 	vector<double> enfantCoefs;
 	double newVar=variance;
 	Color newCol=mere->couleur;
-	if(hasard1()<.05){ 
+	if(hasard1()<.02){ 
 		 newVar=20*variance; //grosse mutation
 		newCol=random_col();
 	}
@@ -267,7 +267,7 @@ int main()
 	cin >> deg;
 
 vector<double>grandeurs;
-grandeurs.reserve(deg);
+grandeurs.resize(deg);
 double g=100;
 for( int d=0; d<deg; d++){
 	grandeurs[deg-d-1]=g;
@@ -355,6 +355,8 @@ for( int d=0; d<deg; d++){
 	for (int i = 0; i < 4; ++i)
 		axes[i].color = Color(150, 150, 150);
 	int idGeneration = 0;
+
+	int numPopu=0;
 	while (window.isOpen())
 	{
 		// SFML 3 : pollEvent() -> std::optional<Event>
@@ -403,6 +405,8 @@ for( int d=0; d<deg; d++){
 				}
 				curves.push_back(curve);
 			}
+			cout<<"Population numero "<<numPopu<<" : ";
+			numPopu++;
 			cout << minVec(scores) << " " << scoreMoyen(scores) << endl;
 			window.clear(Color::Black);
 			window.draw(axes);
