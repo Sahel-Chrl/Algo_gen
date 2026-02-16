@@ -1,4 +1,5 @@
-- chercher le chemin le plus court entre deux points.
+Projet d'algorithmes genetiques à faire pour la suite :
+
+- création labyrinthes et optimisation du trajet.
 - optimisation des trajet delivraison des camions.
-- Trouver la parabole dont la distance a des points choisis aléatoirement est la minimum.
-- Trouver le polynome dont la distance a des points choisis aléatoirement est la minimum.
+- adaptation des individus a une image donnée.
