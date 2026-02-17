@@ -6,7 +6,6 @@
 #include <cmath>
 #include <algorithm>
 #include <SFML/Graphics.hpp> // Nécessaire pour RenderWindow
-#include "AG-parabole3.h"
 using namespace sf;
 using namespace std;
 
