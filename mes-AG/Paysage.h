@@ -19,9 +19,12 @@ class Paysage {
         Color random_col();
         centre circleCenter(int nbCercles);
         vector<double> createRayons(int nbCercles);
-        centre carreCenter(int nbCarres);
+        centre squareCenter(int nbCarres);
         vector<double> createCote(int nbCarres);
-        void afficheCerlces(const centre& centres,const vector<double>& rayons, int nbCercles);
-        void afficheCarres(const centre& centres, const vector<double>&cote, int nbCarres);
+        centre triCenter (int nbTri);
+        vector<double> createCoteTri(int nbTri);
 
+        void affiche(const centre& centresCircles,const vector<double>& rayons, int nbCercles,
+            const centre& centreSquares, const vector<double>&coteSquares, int nbCarres,
+            const centre& centreTri, const vector<double>&coteTri, int nbTri);
 };

@@ -2,16 +2,27 @@
 
 int main()
 {
+    srand(time(NULL));
     Paysage p;
 
-    int nbCercles;
+    int nbCircles, nbSquares, nbTri;
     cout << "combien de cercles dans ton paysage ?"<<endl;
-    cin >>nbCercles;
+    cin >>nbCircles;
+    cout << "combien de Carrés dans ton paysage ?"<<endl;
+    cin >>nbSquares;
+    cout <<"combien de triangles dans ton paysage ?"<<endl;
+    cin >>nbTri;
 
-    auto centres = p.circleCenter(nbCercles);
-    auto rayons = p.createRayons(nbCercles);
+    auto centresCircles = p.circleCenter(nbCircles);
+    auto rayons = p.createRayons(nbCircles);
+    auto centresSquares = p.squareCenter(nbSquares);
+    auto coteSquares = p.createCote(nbSquares);
+    auto centresTri = p.triCenter(nbTri);
+    auto coteTri = p.createCoteTri(nbTri);
 
-    p.afficheCerlces(centres,rayons,nbCercles);
+    p.affiche(centresCircles, rayons, nbCircles,
+        centresSquares, coteSquares, nbSquares,
+        centresTri, coteTri, nbTri);
     return 0;
 }
 
