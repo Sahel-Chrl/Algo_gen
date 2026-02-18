@@ -8,7 +8,7 @@ int main()
     cout << "combien de cercles dans ton paysage ?"<<endl;
     cin >>nbCercles;
 
-    auto centres = p.createCenter(nbCercles);
+    auto centres = p.circleCenter(nbCercles);
     auto rayons = p.createRayons(nbCercles);
 
     p.afficheCerlces(centres,rayons,nbCercles);
