@@ -14,3 +14,4 @@ int main()
     p.afficheCerlces(centres,rayons,nbCercles);
     return 0;
 }
+
