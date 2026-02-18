@@ -32,7 +32,7 @@ void Paysage::afficheCerlces(const centreCercles& centres,const vector<double>& 
 
     for (int k = 0; k < nbCercles; k++) {
 
-        CircleShape circle(rayons[k]);
+        CircleShape circle(rayons[k]*10);
         circle.setFillColor(Color::Red);
         circle.setOrigin(Vector2f((float)rayons[k], (float)rayons[k]));
 

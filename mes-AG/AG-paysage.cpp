@@ -1,6 +1,6 @@
 #include "Paysage.h"
 
-int maint ()
+int main()
 {
     Paysage p;
 
