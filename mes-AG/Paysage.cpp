@@ -78,6 +78,7 @@ return result;
 
 void Paysage::affiche(const centre& centresCircles,const vector<double>& rayons,int nbCercles,const centre& centresSquares, const vector<double>&coteSquares, int nbCarres, const centre& centreTri, const vector<double>&coteTri, int nbTri)
 {
+	Color col=random_col();
     RenderWindow window(VideoMode(Vector2u(600, 600)), "Cercles avec SFML");
     window.setFramerateLimit(60);
 
@@ -86,8 +87,8 @@ void Paysage::affiche(const centre& centresCircles,const vector<double>& rayons,
     for (int k = 0; k < nbCercles; k++) {
 
         CircleShape circle(rayons[k]*10);
-        //circle.setFillColor(Color::Red);
-        circle.setFillColor(random_col());
+        circle.setFillColor(col);
+        //circle.setFillColor(random_col());
         circle.setOrigin(Vector2f((float)rayons[k], (float)rayons[k]));
 
         float px = static_cast<float>((centresCircles[k].first  + 100.0) * 3.0);
@@ -102,7 +103,7 @@ void Paysage::affiche(const centre& centresCircles,const vector<double>& rayons,
     for (int j = 0; j < nbCarres; j++) {
 
         RectangleShape square(Vector2f(coteSquares[j]*11, coteSquares[j]*11));
-        square.setFillColor(random_col());
+        square.setFillColor(col);
         square.setPosition(Vector2f((centresSquares[j].first+100)*3, (centresSquares[j].second+100)*3));
         float degSquares = ((float)(rand()) / (float)(RAND_MAX)) * 90;
         square.setRotation(degrees(degSquares));
@@ -117,7 +118,7 @@ void Paysage::affiche(const centre& centresCircles,const vector<double>& rayons,
 		ConvexShape tri;
 		float deg = ((float)(rand()) / RAND_MAX * 120);
 		float h = coteTri[i] * sqrt(3) *10;
-		tri.setFillColor(random_col());
+		tri.setFillColor(col);
 
 		tri.setPointCount(3);
 		tri.setPoint(0, Vector2f(0, 0));
