@@ -5,7 +5,7 @@ Algo-gen est un projet visant à résoudre des problèmes par technique d'approx
 → Exemple de mon premier AG : [AG-parabole.cpp](mes-AG/Parabole/AG-parabole3.cpp)
 
 ##Installation ⬇️
-Pour lancer les AG crées dans [mes-AG](mes-AG/) vous devrez installer [Visual Studio Code](https://code.visualstudio.com/download) pour le code et [SFML](https://www.sfml-dev.org/download/sfml/2.5.1/index-fr.php) pour l'affichage.
+Pour lancer les AG créés dans [mes-AG](mes-AG/) vous devrez installer [Visual Studio Code](https://code.visualstudio.com/download) pour le code et [SFML](https://www.sfml-dev.org/download/sfml/2.5.1/index-fr.php) pour l'affichage.
 
 
 
