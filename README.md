@@ -1,6 +1,6 @@
 ## 🇫🇷 Présentation
 # Algo-gen 💻🧬
-Algo-gen est un projet visant à résoudre des problèmes par technique approximation en créeant des Algorithmes Genetiques. Ce projet vise à fournir des outils efficaces et modulaires pour résoudre des problèmes d'optimisation dans divers domaines.  
+Algo-gen est un projet visant à résoudre des problèmes par technique d'approximation en créant des Algorithmes Génétiques. Ce projet vise à fournir des outils efficaces et modulaires pour résoudre des problèmes d'optimisation dans divers domaines.  
 → Pour decouvrir ce qu'est un AG : [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
 → Exemple de mon premier AG : [AG-parabole.cpp](mes-AG/Parabole/AG-parabole3.cpp)
 
