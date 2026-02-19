@@ -13,7 +13,7 @@ Pour lancer les AG crées dans [mes-AG](mes-AG/) vous devrez installer [Visual S
 # Algo-gen 💻🧬
 Algo-gen is a project that aims to solve problems using approximation techniques by creating Genetic Algorithms. 
 This project aims to provide effective and modular tools for solving optimization problems in various fields.  
-→ To find out what a GA is: [comprendre_creer_un_AG](comprendre_creer_un_AG/understanding-genetic-GA.txt)  
+→ To find out what a GA is: [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
 → Example of my first GA: [AG-parabole.cpp](mes-AG/Parabole/AG-parabole3.cpp)  
  
 ##Installation ⬇️
