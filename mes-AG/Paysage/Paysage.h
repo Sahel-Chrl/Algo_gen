@@ -10,21 +10,37 @@ using namespace std;
 using namespace sf;
 
 //cree une fenere 100 sur 100 qui affiche un paysage 
-using centre= vector<pair<double,double>>;
 
+Color random_col();
+float randfloat();
 
-class Paysage { 
-    int nbCercles;  
+class Cercle {
+    public :
+    float x; //coordonnées du centre
+    float y;
+    float rayon;
+    Cercle();
+    CircleShape draw();
+    void print();
+};
+
+class Carre {
+    public :
+    float x;
+    float y;
+    float cote;
+    float rotation;
+    Carre();
+    RectangleShape draw();
+    void print();
+};
+
+class Paysage {  
     public : 
-        Color random_col();
-        centre circleCenter(int nbCercles);
-        vector<double> createRayons(int nbCercles);
-        centre squareCenter(int nbCarres);
-        vector<double> createCote(int nbCarres);
-        centre triCenter (int nbTri);
-        vector<double> createCoteTri(int nbTri);
-
-        void affiche(const centre& centresCircles,const vector<double>& rayons, int nbCercles,
-            const centre& centreSquares, const vector<double>&coteSquares, int nbCarres,
-            const centre& centreTri, const vector<double>&coteTri, int nbTri);
+        vector<Cercle> cercles;
+        vector<Carre> carres;
+        vector<vector<bool>> tableau;
+        int step=5;
+        Paysage();
+        void affiche();
 };
