@@ -18,16 +18,15 @@ float random_coord(){
 }
 
 Cercle::Cercle(){
-x = random_coord();  // Random value between -300 and 300
+    x = random_coord();  // Random value between -300 and 300
     y = random_coord();  // Random value between -300 and 300
     rayon = randfloat()*75;     // Random value between 0 and 75
 }
 
-CircleShape Cercle::draw()
+CircleShape Cercle::draw(Color color)
 {
         CircleShape circle(rayon);
-        circle.setFillColor(Color(255,0,0,100));
-        //circle.setFillColor(random_col());
+        circle.setFillColor(color);
         circle.setOrigin(Vector2f(rayon, rayon));
         circle.setPosition(Vector2f(x, y));
 return circle;
@@ -48,10 +47,10 @@ void Carre::print()
     cout<< x <<" "<<y<<" "<<cote<<endl;
 }
 
-RectangleShape Carre::draw()
+RectangleShape Carre::draw(Color color)
 {
         RectangleShape square(Vector2f(cote, cote));
-        square.setFillColor(Color(0,255,0,100));
+        square.setFillColor(color);
         square.setPosition(Vector2f(x, y));
         square.setRotation(radians(rotation));
         return square;
@@ -78,31 +77,4 @@ Paysage::Paysage()
         tableau.push_back(ligne);
     }
     //remploir le tableau de true fals paysage en lisznt les pixels
-}
-
-void Paysage::affiche()
-{
-    RenderWindow window(VideoMode(Vector2u(600, 600)), "Cercles avec SFML");
-    window.setFramerateLimit(60);
-    bool disp=true;
-    while (window.isOpen()) {
-        while (auto ev = window.pollEvent()) {
-            if (ev->is<Event::Closed>())
-              window.close();
-        }
-
-        window.clear(Color::Black);
-        for (auto& cercle : cercles){
-            if(disp) cercle.print();
-              window.draw(cercle.draw());
-        }
-         if (disp) cout<<"--"<<endl;
-        for (auto& carre : carres){
-            if(disp) carre.print();
-            window.draw(carre.draw());
-        }
-        if (disp) cout<<endl;
-        disp=false;
-        window.display();
-    }
 }

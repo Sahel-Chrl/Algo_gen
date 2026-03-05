@@ -20,7 +20,7 @@ class Cercle {
     float y;
     float rayon;
     Cercle();
-    CircleShape draw();
+    CircleShape draw(Color color);
     void print();
 };
 
@@ -31,7 +31,7 @@ class Carre {
     float cote;
     float rotation;
     Carre();
-    RectangleShape draw();
+    RectangleShape draw(Color color);
     void print();
 };
 
@@ -42,5 +42,4 @@ class Paysage {
         vector<vector<bool>> tableau;
         int step=5;
         Paysage();
-        void affiche();
 };
