@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 using namespace sf;
+#pragma once // pour ne pas changer cercle carre...
 
 //cree une fenere 100 sur 100 qui affiche un paysage 
 

@@ -69,8 +69,8 @@ float Individu::score(Individu individu, int pas)
     unsigned int largeur  = size.x; //unsigner pour pas negatif
     unsigned int hauteur = size.y;
     for (int i=0; i<largeur; i=i+pas){
-        for(int j=0; j<hauteur; j+pas){
-            Color c = screenshot.getPixel({i,j});
+        for(int j=0; j<hauteur; j=j+pas){
+            Color c = screenshot.getPixel(Vector2u(i,j));
 
             if (c != Color::Magenta) // intersections violettes donc on teste comme ça.
                 bien = bien+1;
@@ -81,4 +81,6 @@ float Individu::score(Individu individu, int pas)
             else;
         }
     }
+    score=bien/mauvais;
+    return score;
 }
