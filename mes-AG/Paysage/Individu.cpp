@@ -28,8 +28,8 @@ void Individu::affiche(Individu individu, Paysage paysage)
               window.close();
         }
 
-        Color red(255,0,0,120);
-        Color blue(0,0,255,120);
+        Color red(255,0,0,150);
+        Color blue(0,0,255,130);
         window.clear(Color::Black);
         for (auto& cercle : paysage.cercles){
             if(disp) cercle.print();

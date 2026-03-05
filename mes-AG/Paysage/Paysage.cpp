@@ -20,7 +20,7 @@ float random_coord(){
 Cercle::Cercle(){
     x = random_coord();  // Random value between -300 and 300
     y = random_coord();  // Random value between -300 and 300
-    rayon = randfloat()*75;     // Random value between 0 and 75
+    rayon = randfloat()*65;     // Random value between 0 and 75
 }
 
 CircleShape Cercle::draw(Color color)
