@@ -1,15 +1,20 @@
 #include "Individu.h"
 
-Individu::Individu(int nbChromosomes)
+Individu::Individu()
 {
+    int nbChromosomes;
+    cout <<"combien de chromosomes(cercles/carres) par individus ?"<<endl;
+    cin >> nbChromosomes;
+
+
     int nbCarres, nbCercles;
-nbCarres = (int)(randfloat() *nbChromosomes);
-nbCercles = nbChromosomes-nbCarres;
-for(int i=0;i<nbCarres; i++){
-    carresIndiv.push_back(Carre());
-}
-for(int j=0;j<nbCercles; j++){
-    cerclesIndiv.push_back(Cercle());
+    nbCarres = (int)(randfloat() *nbChromosomes);
+    nbCercles = nbChromosomes-nbCarres;
+    for(int i=0;i<nbCarres; i++){
+        carresIndiv.push_back(Carre());
+    }
+    for(int j=0;j<nbCercles; j++){
+        cerclesIndiv.push_back(Cercle());
 }
 }
 

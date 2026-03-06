@@ -78,3 +78,4 @@ Paysage::Paysage()
     }
     //remploir le tableau de true fals paysage en lisznt les pixels
 }
+
