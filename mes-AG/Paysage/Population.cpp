@@ -1,17 +1,38 @@
 #include "Population.h"
 
-/*Population::Population(){
-    vector<Individu> population;
-    int nbIndiv;
-    cout <<"combien d'individus veux tu ?"<<endl;
-    cin >> nbIndiv;
-    for (int i=0; i<nbIndiv; i++){
-        //population.push_back(individu)//probleme je veux faire ma population d'individu ici comment faire ?
-    }
 
-}*/
 
-float Population::scoreMoyen(vector<double> scores)
+void Population::nextGeneration(){
+
+	vector<Individu*> descendence;
+    int nbIndiv=individus.size();
+	float moyenne=scoreMoyen();
+	int min=minScore();
+	vector<int> scoresPop= scoreNegToPos();
+	vector<float> proba= score2probas();
+	vector<float> cumul= probas2cumul(proba);
+	for (int i=0; i<individus.size(); i++){
+		int num = numIndiv(cumul);
+		Individu* descendenti = individus[i]->descendant();
+		descendence.push_back(descendenti);
+	}
+	for (int j=0; j<individus.size();j++){
+		delete individus[j];
+		individus[j]=descendence[j];
+	}
+}
+
+Population::Population(vector<Individu*> indivs, int p){
+	pas=p;
+	for (int i=0; i<indivs.size(); i++){
+		individus.push_back(indivs[i]);
+		scores.push_back(indivs[i]->score(pas));
+	}
+
+}
+
+
+float Population::scoreMoyen()
 {   int total=0;
     for (auto score : scores){
         total+=score;
@@ -21,9 +42,9 @@ float Population::scoreMoyen(vector<double> scores)
 }
 
 
-double Population::minScore(vector<double> scores)
+int Population::minScore()
 {
-	double min = scores[0];
+	float min = scores[0];
 	for (int i = 0; i < scores.size(); i++)
 	{
 		if (scores[i] < min)
@@ -35,10 +56,23 @@ double Population::minScore(vector<double> scores)
 }
 
 
-vector<double> Population::score2probas(vector<double>scores)
+vector<int> Population::scoreNegToPos()
 {
-	vector<double> probas;
-	double somme = 0;
+	int min= minScore();
+	if (min<0){
+		for (int i=0; i<scores.size(); i++){
+			scores[i]-=min;
+		}
+	}
+	return scores;
+}
+
+
+
+vector<float> Population::score2probas()
+{
+	vector<float> probas;
+	float somme = 0;
 	for (auto score : scores) // plus le score est grand moins il aura de chance d'être pris (on veut la distance min)
 	{
 		probas.push_back(score);
@@ -60,9 +94,9 @@ vector<double> Population::score2probas(vector<double>scores)
 }
 
 
-vector<double> Population::probas2cumul(vector<double> probas)
+vector<float> Population::probas2cumul(vector<float> probas)
 {
-	vector<double> cumul;
+	vector<float> cumul;
 	cumul.push_back(0);
 	for (int i = 0; i < probas.size(); i++)
 	{
@@ -72,9 +106,9 @@ vector<double> Population::probas2cumul(vector<double> probas)
 }
 
 // fonction qui prend au hasard un nombre entre 0 et 1 et revoie la position de ce nombre dans cumul (renvoi quel individu c'est)
-int Population::numIndiv(vector<double> cumul)
+int Population::numIndiv(vector<float> cumul)
 {
-	double r = rand()/RAND_MAX;
+	float r = rand()/RAND_MAX;
 	int debut = 0, fin = cumul.size() - 1;
 	while (fin - debut > 1)
 	{
@@ -91,17 +125,3 @@ int Population::numIndiv(vector<double> cumul)
 	return debut;
 }
 
-
-
-Individu Population::descendent(Individu individu){
-    int mutationCoordonnee, mutationRayon, mutationCote;
-    for (int i=0; i<individu.cerclesIndiv.size(); i++){
-        Cercle cercle = individu.cerclesIndiv[i];
-        cercle.x+=mutationCoordonnee;
-        cercle.y+=mutationCoordonnee;
-        cercle.rayon+=mutationRayon;
-    }
-    for (int j=0; j<individu.carresIndiv.size(); j++){
-        Carre carre = individu.carresIndiv[j];
-    }
-}
