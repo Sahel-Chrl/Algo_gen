@@ -416,7 +416,7 @@ int main()
 			for (auto curve : curves)
 				window.draw(curve);
 			window.display();
-			sleep(milliseconds(100));
+			sleep(milliseconds(10));
 		}
 		idGeneration++;
 	}
