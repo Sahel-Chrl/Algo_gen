@@ -3,7 +3,7 @@ et de trouver les polynomes d'un degré fixé pour lesquels la distance moyenne 
 faible possible.
 
 
-Premièrement l'algo vous demandera un nombre de points qu'il repartira aléatoirement. Ces points correspondrons
+Premièrement l'algo des points qu'il repartira aléatoirement dans une fenêtre. Ces points correspondrons
 à l'environement auquel les individus devrons s'adapter. Pour nous les humains on doit s'adapter le mieux possible 
 à la météo autour de nous ou bien aux predateurs, eh bien la meteo peut être assimilée à un de ces points et les 
 predateurs à un autre. 
@@ -22,6 +22,18 @@ des autres, cette methode permet d'eviter de stagner dans des minimums locals lo
 meilleur option.
 Dans l'exemple precedents on pourait assimiler les coefficients des polynomes aux genes des individus.
 
+
+Avant de commencer : le code vous demandera 4 choses 
+- le nombre de points que vous voulez, je vous conseil un nombre entre 4 et 8 pour qu'il ne sois pas trop compliqué
+pour les courbes de se rapprocher des points.
+- le nombre de coefficients par polynomes, je vous conseille 10. Ce nombre de coefficient laisse plus ou moins de 
+liberté a nos polynomes, si vous metez deux vous aurez des droites.
+- le nombre d'individu par population, je vous conseille une trentaine.
+- le nombre de generations, je vous conseille 10000, plus il y a de generation plus on se rapprochera des points, en
+mettant beaucoup de generation vous pourrez juste decider du moment ou vous arreter en fermant la fenêtre.
+
+Pour tester l'efficacité du programme vous pouvez essayer avec 2 point, 2 coefficients et 5 courbes, normalement les 
+droites atteindrons rapidement la perfection.
 
 
 
@@ -330,7 +342,7 @@ void setup() {
   }
 
 
-  m = lireInt("combien de paraboles voulez vous ?");
+  m = lireInt("combien de polynomes voulez vous ?");
   if (m < 1) m = 1;
   // appel d'une liste de paraboles pour la population
   popu = create_parab(m, deg, grandeurs);
