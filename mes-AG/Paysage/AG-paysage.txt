@@ -1,0 +1,22 @@
+AG-paysage est un algorithme qui a pour objectif de representer plus explicitement la selection naturelle qu'on peut
+trouver dans la nature.
+
+Dans cet AG il sera placé aléatoirement des cercles et carrés de couleur rouge. Cet ensemble de cercles/carrés correspond
+au patrimoine genetique ideal d'un individu pour survivre.
+On l'appel paysage : "l'environement" auquel nos individus devrons d'adapter.
+
+Chaque individu est un ensemble de cercles et carrés bleus, on pourait donc immaginer les cercles et carrés de l'individu
+comme ses chromosomes, et les coordonnées de ces cercles/carrés ainsi que leurs largeur/rayon (etc...) à ses gênes.
+Dans une population, il y a plusieurs individus qui sont en "concurence", ceux les plus proche des carrés et ronds rouges
+seront plus apte à se reproduire, et ainsi auront plus de descendants.
+
+Avant de commencer : il vous sera posé 4 questions
+- combien de
+-
+-
+-
+
+Je vous conseille (,,,) pour un premier essai.
+
+VOICI LE CODE FONCTIONNEL EN PROCESSING (installation facile) :
+
