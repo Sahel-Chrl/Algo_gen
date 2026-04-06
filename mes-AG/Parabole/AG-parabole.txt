@@ -1,12 +1,11 @@
-Mon premier algorithme génétique : AG-parabole3 est un algorithme qui a pour objectif de prendre des points au hasard dans R2
-et de trouver les polynômes d'un degré fixé pour lesquels la distance moyenne (verticale) des points à la courbe est la plus
-faible possible.
+Mon premier algorithme génétique : AG-parabole3 est un algorithme qui a pour objectif de prendre des points au hasard dans une
+partie fermée de R2 et de trouver les polynômes d'un degré fixé pour lesquels la distance moyenne (verticale) des points à 
+la courbe est la plus faible possible.
 
-
-Premièrement l'algo des points qu'il répartira aléatoirement dans une fenêtre. Ces points correspondront
-à l'environnement auquel les individus devront s'adapter. Pour nous les humains on doit s'adapter le mieux possible
-à la météo autour de nous ou bien aux prédateurs, eh bien la météo peut être assimilée à un de ces points et les
-prédateurs à un autre.
+Premièrement l'algo répartira aléatoirement dans une fenêtre le nombre de points choisi par l'utilisateur. 
+Ces points correspondront à l'environnement auquel les individus devront s'adapter. Pour nous les humains on doit 
+s'adapter le mieux possible à la météo autour de nous ou bien aux prédateurs, eh bien la météo peut être assimilée 
+à un de ces points et les prédateurs à un autre.
 
 Les polynômes seront donc les individus qui évoluent pour s'adapter au mieux possible à l'environnement c.-à-d. ici
 se rapprocher le plus possible des points. Dans l'exemple juste au dessus les humains sont donc les polynômes.
@@ -21,7 +20,6 @@ On ajoute également une probabilité de grosse mutation qui quand elle a lieu d
 des autres, cette methode permet d'éviter de stagner dans des minimums locaux lorsqu'en réalité il existe une
 meilleure option.
 Dans l'exemple précédent on pourrait assimiler les coefficients des polynômes aux gènes des individus.
-
 
 Avant de commencer : le code vous demandera 4 choses
 - le nombre de points que vous voulez, je vous conseille un nombre entre 4 et 8 pour qu'il ne soit pas trop compliqué
