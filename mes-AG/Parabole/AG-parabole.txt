@@ -1,39 +1,44 @@
-Mon premier Algoithme Genetique : AG-parabole3 est un algoithme qui a pour objectif de prendre des points au hasard dans R2
-et de trouver les polynomes d'un degré fixé pour lesquels la distance moyenne (verticale) des points a la courbe est la plus 
+Mon premier algorithme génétique : AG-parabole3 est un algorithme qui a pour objectif de prendre des points au hasard dans R2
+et de trouver les polynômes d'un degré fixé pour lesquels la distance moyenne (verticale) des points à la courbe est la plus
 faible possible.
 
 
-Premièrement l'algo des points qu'il repartira aléatoirement dans une fenêtre. Ces points correspondrons
-à l'environement auquel les individus devrons s'adapter. Pour nous les humains on doit s'adapter le mieux possible 
-à la météo autour de nous ou bien aux predateurs, eh bien la meteo peut être assimilée à un de ces points et les 
-predateurs à un autre. 
+Premièrement l'algo des points qu'il répartira aléatoirement dans une fenêtre. Ces points correspondront
+à l'environnement auquel les individus devront s'adapter. Pour nous les humains on doit s'adapter le mieux possible
+à la météo autour de nous ou bien aux prédateurs, eh bien la météo peut être assimilée à un de ces points et les
+prédateurs à un autre.
 
-Les polynomes seront donc les individus qui evoluent pour s'adapter au mieux possible à l'environement càd ici
-se rapprocher les plus possible des points. Dans l'exemple juste au dessus les humains sont donc les polynomes.
+Les polynômes seront donc les individus qui évoluent pour s'adapter au mieux possible à l'environnement c.-à-d. ici
+se rapprocher le plus possible des points. Dans l'exemple juste au dessus les humains sont donc les polynômes.
 
-Une population est constitué de n paraboles qui sont " en concurence " celle qui est la plus proche des points 
-aura plus de chances de se reproduire, la plus eloignée n'aura surement aucun descendent.
+Une population est constituée de n paraboles qui sont " en concurrence " celle qui est la plus proche des points
+aura plus de chances de se reproduire, la plus éloignée n'aura surement aucun descendant.
 
-Lorsque qu'un parent est choisi il est cree un descendant qui aura des coefficient proche de celui du parent, on 
-ajoute à chaque coefficient une mutation qui fait en sorte que les descendant ne sois pas un clone de son parent. 
-Ces mutation permetra de se rapprocher des points au fur et a mesure des generations.
-On ajoute egalement une probabilité de grosse mutation qui quand elle a lieu donne un descendant bien plus eloigné
-des autres, cette methode permet d'eviter de stagner dans des minimums locals lorsqu'en realité il existe une
-meilleur option.
-Dans l'exemple precedents on pourait assimiler les coefficients des polynomes aux genes des individus.
+Lorsqu'un parent est choisi il est créé un descendant qui aura des coefficients proches de celui du parent, on
+ajoute à chaque coefficient une mutation qui fait en sorte que les descendants ne soient pas un clone de son parent.
+Ces mutation permettront de se rapprocher des points au fur et a mesure des générations.
+On ajoute également une probabilité de grosse mutation qui quand elle a lieu donne un descendant bien plus éloigné
+des autres, cette methode permet d'éviter de stagner dans des minimums locaux lorsqu'en réalité il existe une
+meilleure option.
+Dans l'exemple précédent on pourrait assimiler les coefficients des polynômes aux gènes des individus.
 
 
-Avant de commencer : le code vous demandera 4 choses 
-- le nombre de points que vous voulez, je vous conseil un nombre entre 4 et 8 pour qu'il ne sois pas trop compliqué
+Avant de commencer : le code vous demandera 4 choses
+- le nombre de points que vous voulez, je vous conseille un nombre entre 4 et 8 pour qu'il ne soit pas trop compliqué
 pour les courbes de se rapprocher des points.
-- le nombre de coefficients par polynomes, je vous conseille 10. Ce nombre de coefficient laisse plus ou moins de 
-liberté a nos polynomes, si vous metez deux vous aurez des droites.
-- le nombre d'individu par population, je vous conseille une trentaine.
-- le nombre de generations, je vous conseille 10000, plus il y a de generation plus on se rapprochera des points, en
-mettant beaucoup de generation vous pourrez juste decider du moment ou vous arreter en fermant la fenêtre.
+- le nombre de coefficients par polynôme, je vous conseille 10. Ce nombre de coefficients laisse plus ou moins de
+liberté a nos polynômes, si vous mettez deux vous aurez des droites.
+- le nombre d'individus par population, je vous conseille une trentaine.
+- le nombre de générations, je vous conseille 10000, plus il y a de générations plus on se rapprochera des points, en
+mettant beaucoup de générations vous pourrez juste décider du moment où vous arrêter en fermant la fenêtre.
 
-Pour tester l'efficacité du programme vous pouvez essayer avec 2 point, 2 coefficients et 5 courbes, normalement les 
-droites atteindrons rapidement la perfection.
+Pour tester l'efficacité du programme vous pouvez essayer avec 2 points, 2 coefficients et 5 courbes, normalement les
+droites atteindront rapidement la perfection.
+
+
+
+
+Pour lancer le code je vous conseille d'utiliser celui ci dans processing (qui est très simple a installer) :
 
 
 
