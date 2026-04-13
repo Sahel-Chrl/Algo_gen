@@ -4,19 +4,20 @@ Dans ce projet, je cherche à mettre en évidence le lien étroit entre les algo
 Pour cela, je crée des AG (codes qui utilisent le principe évolutif afin de résoudre divers problèmes d'approximation), puis j'étudie les mécanismes de l'algorithme en essayant de les relier à des principes évolutifs connus. 
 Je pense que cette approche de l'évolution peut amener une autre façon, peut-être plus terre à terre, d'aborder des questions fondamentales de la biologie. 
   
-Pour vous donner un exemple simple, nous pouvons observer plus en détail mon premier AG (en Processing, resp en C++) : [AG-polynomes](mes-AG/Polynomes/Polynomes.pde) // [AG-polynomes](mes-AG/Polynomes/AG-polynomes.cpp)   
-L'objectif de cet AG est plutôt simple : se rapprocher de points avec des polynômes. En voici une explication grossière :
-- Nous plaçons des points aléatoirement répartis dans une fenêtre de l'ordinateur. 
+Pour vous donner un exemple facile, nous pouvons observer plus en détail mon premier AG (en Processing, resp en C++) : [AG-polynomes](mes-AG/Polynomes/Polynomes.pde) // [AG-polynomes](mes-AG/Polynomes/AG-polynomes.cpp)   
+L'objectif de cet AG est plutôt simple : se rapprocher de points fixes imposés avec des polynômes comme le vivant s'adapterai à son environnement.  
+En voici une explication grossière :
+- Nous plaçons des points aléatoirement répartis dans une fenêtre de l'ordinateur correspondant aux contraintes de l'environnement. 
 - Nous créons un certain nombre de polynômes de degré fixe qui représenteront des individus dans une population. 
 - Nous calculons la distance verticale de ces polynômes aux points, créant ainsi le score des polynômes (l'objectif étant de se rapprocher des points). 
-- À partir d'une population et du score des individus, nous donnons naissance à une nouvelle, en copiant un principe évolutif simple : les plus forts feront plus d'enfants. 
-- Lors de la création d'un enfant, nous ajoutons des mutations en modifiant « aléatoirement » les coefficients du polynôme.
+- À partir d'une population et du score des individus, nous donnons naissance à une nouvelle génération, en copiant un principe évolutif simple : les plus forts feront plus d'enfants. 
+- Lors de la création d'un descendant, nous ajoutons des mutations en modifiant « aléatoirement » les coefficients du polynôme.
 - Nous répétons le processus et observons alors le rapprochement des polynômes vers les points. 
   
 Cet AG consiste donc à chercher le meilleur polynôme d'un degré fixé pour approcher des points. Ce problème est bien sûr entièrement résolu mathématiquement, mais notre objectif ici n'est pas de trouver le meilleur polynôme, mais bien de modéliser un schéma évolutif.
 
 À partir de cet algorithme pourtant simple, on peut observer des mécanismes biologiques déjà compliqués, notamment autour de la **shifting balance theory** : 
-Les maximums locaux dans lesquels peut se bloquer une population (un meilleur score local dans lequel on reste bloqué car, pour en échapper, il faut passer par des scores bien moins bons) : en biologie évolutive, on parle souvent de vallée adaptative ; notre population est sur un pic adaptatif local. Pour atteindre un pic plus élevé, elle doit parfois passer par une zone de fitness plus faible et descendre dans une vallée afin de remonter. 
+Les maximums locaux dans lesquels peut se bloquer une population (un meilleur score local dans lequel on reste bloqué car, pour en échapper, il faut passer par des scores bien moins bons) : en biologie évolutive, on parle souvent de vallée adaptative; notre population est sur un pic adaptatif local. Pour atteindre un pic plus élevé, elle doit parfois passer par une zone de fitness plus faible et descendre dans une vallée afin de remonter. 
 Plus une population est petite, plus la **dérive génétique** est fréquente, et donc le passage d'une vallée adaptative est plus simple du fait des effets stochastiques plus forts dans les petites populations. 
 La vitesse d'évolution d'une population en fonction de sa taille : on pourrait parler de **rythme évolutif** ou de vitesse d'adaptation ; plus la population est grande, plus elle trouvera un maximum local rapidement, mais il aura tendance à être moins bon que celui d'une population plus petite. 
 
