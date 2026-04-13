@@ -1,22 +1,19 @@
-AG-paysage est un algorithme qui a pour objectif de representer plus explicitement la selection naturelle qu'on peut
+AG-paysage est un algorithme qui a pour objectif de représenter plus explicitement la sélection naturelle qu'on peut
 trouver dans la nature.
 
-Dans cet AG il sera placé aléatoirement des cercles et carrés de couleur rouge. Cet ensemble de cercles/carrés correspond
-au patrimoine genetique ideal d'un individu pour survivre.
-On l'appel paysage : "l'environement" auquel nos individus devrons d'adapter.
+Dans cet AG, il sera placé aléatoirement des cercles et des carrés de couleur rouge. Cet ensemble de cercles et de carrés correspond
+au patrimoine génétique idéal d'un individu pour survivre.
+On l'appelle paysage : « l'environnement » auquel nos individus devront s'adapter.
 
-Chaque individu est un ensemble de cercles et carrés bleus, on pourait donc immaginer les cercles et carrés de l'individu
-comme ses chromosomes, et les coordonnées de ces cercles/carrés ainsi que leurs largeur/rayon (etc...) à ses gênes.
-Dans une population, il y a plusieurs individus qui sont en "concurence", ceux les plus proche des carrés et ronds rouges
-seront plus apte à se reproduire, et ainsi auront plus de descendants.
+Chaque individu est un ensemble de cercles et de carrés bleus ; on pourrait donc imaginer les cercles et carrés de l'individu
+comme ses chromosomes, et les coordonnées de ces cercles/carrés ainsi que leur largeur/rayon (etc.) comme ses gènes.
+Dans une population, il y a plusieurs individus qui sont en « concurrence » ; ceux les plus proches des carrés et ronds rouges
+seront plus aptes à se reproduire, et ainsi auront plus de descendants.
 
 Avant de commencer : il vous sera posé 4 questions
-- combien de
--
--
--
+- Quel pas entre les pixels ? (précision de mesure)
+- Combien d'individus dans une population ?
+- Combien de chromosomes par individu ? (nombre de cercles/carrés)
+- Combien de générations ?
 
-Je vous conseille (,,,) pour un premier essai.
-
-VOICI LE CODE FONCTIONNEL EN PROCESSING (installation facile) :
-
+Je vous conseille (5, 20, 30, 10 000) pour un premier essai.

@@ -1,5 +1,0 @@
-Projet d'algorithmes genetiques à faire pour la suite :
-
-- création labyrinthes et optimisation du trajet.
-- optimisation des trajet delivraison des camions.
-- adaptation des individus a une image donnée.
