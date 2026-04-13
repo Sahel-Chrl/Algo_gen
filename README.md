@@ -1,4 +1,4 @@
-## 🇫🇷 french Présentation
+## 🇫🇷 french Presentation
 # Algo-gen 💻🧬
 Dans ce projet, je cherche à mettre en évidence le lien étroit entre les algorithmes génétiques et la biologie évolutive. 
 Pour cela, je crée des AG (codes qui utilisent le principe évolutif afin de résoudre divers problèmes d'approximation), puis j'étudie les mécanismes de l'algorithme en essayant de les relier à des principes évolutifs connus. 
