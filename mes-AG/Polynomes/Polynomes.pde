@@ -1,6 +1,9 @@
 import javax.swing.JOptionPane;
 import controlP5.*;
 
+//il faut aussi ouvrir classe_polynomes.pde et Point.pde
+
+
 ControlP5 cp5;
 
 float hasard()
@@ -253,7 +256,7 @@ void setup() {
   cp5 = new ControlP5(this);
   cp5.addSlider("variance")
     .setPosition(575, 90)
-    .setSize(150, 15)
+    .setSize(170, 20)
     .setRange(0,1 )
     .setValue(.05)
     .setDecimalPrecision(3); 
@@ -273,7 +276,7 @@ void setup() {
   degMax=15;
   cp5.addSlider("deg")
     .setPosition(575, 60)
-    .setSize(150, 15)
+    .setSize(170, 20)
     .setRange(1, degMax)
     .setValue(deg)
     .setDecimalPrecision(0); // pas de decimales
@@ -291,7 +294,7 @@ void setup() {
   nb_individus = 30;
   cp5.addSlider("nb_individus")
     .setPosition(575, 30)
-    .setSize(150, 15)
+    .setSize(170, 20)
     .setRange(1, 300)
     .setValue(nb_individus)
     .setDecimalPrecision(0); // pas de decimales
@@ -332,11 +335,15 @@ int pointClique() {
 }
 
 void mousePressed() {
+   if (cp5.isMouseOver()) {
+    return;
+  }
   int i = pointClique();
 
   if (i != -1) {
     points.remove(i);   // enlève le point cliqué
-  } else {
+  }
+  else {
     float x = mouseX / 4.0 - 100;
     float y = mouseY / 4.0 - 100;
     points.add(new Point(x, y));   // ajoute un point
@@ -381,7 +388,7 @@ void draw() {
   background(0);
   text("nb_individus = " + nb_individus, 575, 30);
   text("nombre de coefs = " + deg, 575, 60);
-  text( points.size() + " points", 30, 775);
+  text( points.size() + " points", 575, 130);
   if ( keyPressed && key=='p') {
   points.clear();
   }
@@ -422,7 +429,7 @@ void draw() {
   if (idGeneration % distance_Checkpoint == 0) {
     println("Population numero " + numPopu + " : ");
     numPopu=numPopu+distance_Checkpoint;
-    println(minVec(scores) + " " + scoreMoyen(scores));
+    println(" meilleur score = " + minVec(scores) + "  " + "score moyen = " +scoreMoyen(scores));
     println("degre choisi " + (deg-1) );
   }
 
