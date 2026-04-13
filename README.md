@@ -22,6 +22,7 @@ La vitesse d'évolution d'une population en fonction de sa taille : on pourrait 
 
 → Si vous souhaitez tester mes AG, je vous conseille d'utiliser Processing, simple à installer et plus interactif.  
 → Pour mieux comprendre ce qu'est un AG : [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
+→ Un AG un petit peu plus complexe : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)
 
 
 
@@ -49,3 +50,4 @@ As for the speed of evolution of a population as a function of its size, one cou
 
 → If you would like to test my GAs, I recommend using Processing, which is easy to install and more interactive.  
 → To better understand what a GA is: [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)
+→ A bit more complex : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)
