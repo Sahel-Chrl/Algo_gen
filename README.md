@@ -1,54 +1,49 @@
 ## 🇫🇷 french Presentation
 # Algo-gen 💻🧬
-Dans ce projet, je cherche à mettre en évidence le lien étroit entre les algorithmes génétiques et la biologie évolutive. 
-Pour cela, je crée des AG (codes qui utilisent le principe évolutif afin de résoudre divers problèmes d'approximation), puis j'étudie les mécanismes de l'algorithme en essayant de les relier à des principes évolutifs connus. 
-Je pense que cette approche de l'évolution peut amener une autre façon, peut-être plus terre à terre, d'aborder des questions fondamentales de la biologie. 
+Ce projet vise à explorer les liens entre la biologie évolutive et les algorithmes génétiques (AG, inspirés du principe d’évolution par sélection naturelle). Pour cela, je programme de tels algorithmes, pour essayer ensuite de relier les dynamiques simulées à des principes évolutifs connus. Cette approche me permet d’aborder la biologie évolutive sous un angle théorique, pour mieux en saisir les fondements, et peut-être identifier des questions de recherche pertinentes.  
   
-Pour vous donner un exemple facile, nous pouvons observer plus en détail mon premier AG (en Processing, resp en C++) : [AG-polynomes](mes-AG/Polynomes/Polynomes.pde) // [AG-polynomes](mes-AG/Polynomes/AG-polynomes.cpp)   
-L'objectif de cet AG est plutôt simple : se rapprocher de points fixes imposés avec des polynômes comme le vivant s'adapterai à son environnement.  
-En voici une explication grossière :
-- Nous plaçons des points aléatoirement répartis dans une fenêtre de l'ordinateur correspondant aux contraintes de l'environnement. 
-- Nous créons un certain nombre de polynômes de degré fixe qui représenteront des individus dans une population. 
-- Nous calculons la distance verticale de ces polynômes aux points, créant ainsi le score des polynômes (l'objectif étant de se rapprocher des points). 
-- À partir d'une population et du score des individus, nous donnons naissance à une nouvelle génération, en copiant un principe évolutif simple : les plus forts feront plus d'enfants. 
-- Lors de la création d'un descendant, nous ajoutons des mutations en modifiant « aléatoirement » les coefficients du polynôme.
-- Nous répétons le processus et observons alors le rapprochement des polynômes vers les points. 
+Nous pouvons par exemple observer plus en détail mon premier AG : « AG-polynomes », codé ici en Processing et ici en C++. Son objectif est simple : optimiser des polynômes pour les rapprocher de points fixes imposés, comme une « population de polynômes » s'adapterait à son environnement.  
   
-Cet AG consiste donc à chercher le meilleur polynôme d'un degré fixé pour approcher des points. Ce problème est bien sûr entièrement résolu mathématiquement, mais notre objectif ici n'est pas de trouver le meilleur polynôme, mais bien de modéliser un schéma évolutif.
-
-À partir de cet algorithme pourtant simple, on peut observer des mécanismes biologiques déjà compliqués, notamment autour de la **shifting balance theory** : 
-Les maximums locaux dans lesquels peut se bloquer une population (un meilleur score local dans lequel on reste bloqué car, pour en échapper, il faut passer par des scores bien moins bons) : en biologie évolutive, on parle souvent de vallée adaptative; notre population est sur un pic adaptatif local. Pour atteindre un pic plus élevé, elle doit parfois passer par une zone de fitness plus faible et descendre dans une vallée afin de remonter. 
-Plus une population est petite, plus la **dérive génétique** est fréquente, et donc le passage d'une vallée adaptative est plus simple du fait des effets stochastiques plus forts dans les petites populations. 
-La vitesse d'évolution d'une population en fonction de sa taille : on pourrait parler de **rythme évolutif** ou de vitesse d'adaptation ; plus la population est grande, plus elle trouvera un maximum local rapidement, mais il aura tendance à être moins bon que celui d'une population plus petite. 
-
+En voici une explication :  
+•	Nous commençons par placer des points aléatoirement dans une fenêtre du plan ; ces points représentent l'environnement auquel les polynômes devront s’adapter.  
+•	Nous créons ensuite des polynômes (de degré fixé par l’utilisateur) dont les coefficients sont tirés au hasard dans un intervalle restreint. Les polynômes représent des individus, et leur nombre (choisi par l’utilisateur) correspond à la taille de la population.
+•	Pour calculer la fitness (ou valeur sélective) des polynômes, nous sommons simplement les distances verticales de ces polynômes aux points.  
+•	À partir d'une population et du score des individus, nous générons une nouvelle génération, en simulant un principe évolutif essentiel : les plus adaptés tendent à avoir une descendance plus nombreuse ; c’est l’analogue de la sélection naturelle.  
+•	Pour ce faire, nous tirons la nouvelle génération en assignant aux parents des probabilités correspondant à leur fitness. Ainsi, nous laissons aussi une certaine place au hasard. Plus la population est petite, plus la distribution de la génération n+1 pourra s’éloigner de l’attendu : c’est l’analogue de la dérive génétique.  
+•	Lors de la création d'un descendant, nous ajoutons des modifications aléatoires des coefficients du polynôme : c’est l’analogue de la mutation.  
+•	Nous répétons le processus et observons, à travers les générations, le rapprochement des polynômes vers les points.  
+  
+Notons que ce problème d’optimisation a déjà résolu par ailleurs, mais notre objectif ici n'est pas de trouver le meilleur polynôme ; il s’agit plutôt de mieux appréhender un schéma évolutif darwinien.  
+  
+À partir de cet algorithme pourtant simple, on peut observer des mécanismes biologiques déjà complexes, notamment autour de la « shifting balance theory » : la population de polynômes peut rester bloquée autour d’un maximum local, car pour s’en échapper, il faudrait passer par des scores bien moins bons. De même, en biologie évolutive, on parle souvent du « paysage de fitness » composé de collines (des maxima locaux) et de vallées (correspondant à des génotypes de moindre fitness). De façon très intéressante, la dérive, en ajoutant des fluctuations aléatoires des fréquences des génotypes, peut permettre le passage vers un meilleur maximum local, c’est-à-dire une meilleure exploration évolutive du paysage. Ce phénomène est contrôlé par la taille de la population : plus elle est grande, plus elle trouvera un maximum local rapidement, mais moins elle pourra s’en éloigner pour en trouver un meilleur.  
+  
 → Si vous souhaitez tester mes AG, je vous conseille d'utiliser Processing, simple à installer et plus interactif.  
-→ Pour mieux comprendre ce qu'est un AG : [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
-→ Un AG un petit peu plus complexe : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)
+→ Pour plus de détails sur les AG : [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt). 
+→ Un AG un petit peu plus élaboré, pour un problème plus difficile (adapter des formes à un paysage 2d) : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)  
 
 
 
-## 🇬🇧 Presentation
-# Algo-gen 💻🧬
-In this project, I aim to highlight the close connection between genetic algorithms and evolutionary biology.  
-To do this, I create GAs (programs that use evolutionary principles to solve various approximation problems), then I study the mechanisms of the algorithm while trying to relate them to known evolutionary principles.  
-I believe that this approach to evolution can offer another way, perhaps a more concrete one, to address fundamental questions in biology.  
+
+## 🇬🇧 English Presentation  
+# Algo-gen 💻🧬  
   
-To give you a simple example, we can take a closer look at my first GA (in Processing, then in C++): [AG-polynomes](mes-AG/Polynomes/Polynomes.pde) // [AG-polynomes](mes-AG/Polynomes/AG-polynomes.cpp). 
-The goal of this GA is fairly simple: to get as close as possible to points using polynomials. Here is a rough explanation:
-- We place points randomly distributed within a window on the computer screen.  
-- We create a certain number of fixed-degree polynomials that will represent individuals in a population.
-- We calculate the vertical distance between these polynomials and the points, thus creating the score of each polynomial (the goal being to get as close as possible to the points).
-- From one population and the scores of its individuals, we produce a new one by copying a simple evolutionary principle: the fittest individuals will have more offspring.
-- When creating an offspring, we add mutations by “randomly” modifying the coefficients of the polynomial.
-- We repeat the process and then observe the polynomials moving closer and closer to the points.
+This project aims to explore the links between evolutionary biology and genetic algorithms (GAs, inspired by the principle of evolution through natural selection). To do this, I program such algorithms and then try to relate the simulated dynamics to known evolutionary principles. This approach allows me to study evolutionary biology from a theoretical perspective, in order to better understand its foundations and perhaps identify relevant research questions.  
+  
+For example, we can take a closer look at my first GA: “GA-polynomials,” coded here in Processing and here in C++. Its objective is simple: to optimize polynomials so that they fit a set of fixed points, much like a “population of polynomials” adapting to its environment.  
 
-This GA therefore consists of searching for the best polynomial of a fixed degree to approximate a set of points. Of course, this problem has already been fully solved mathematically, but our goal here is not to find the best polynomial. Rather, it is to model an evolutionary process.
-
-From this algorithm, simple as it may seem, we can already observe complex biological mechanisms, particularly in relation to **shifting balance theory**:
-Local maxima in which a population can become trapped (a local best score in which it remains stuck because escaping it would require going through much worse scores): in evolutionary biology, this is often described as an adaptive valley; our population is sitting on a local adaptive peak. To reach a higher peak, it may sometimes have to pass through a region of lower fitness and descend into a valley before climbing back up.
-The smaller a population is, the more frequent **genetic drift** becomes, and therefore crossing an adaptive valley becomes easier because stochastic effects are stronger in small populations.
-As for the speed of evolution of a population as a function of its size, one could speak of an **evolutionary rate** or speed of adaptation: the larger the population, the faster it will find a local maximum, but that maximum will tend to be less optimal than the one a smaller population might eventually reach.
-
-→ If you would like to test my GAs, I recommend using Processing, which is easy to install and more interactive.  
-→ To better understand what a GA is: [comprendre_creer_un_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)
-→ A bit more complex : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)
+Here is an explanation:  
+• We begin by placing points randomly in a window of the plane; these points represent the environment to which the polynomials must adapt.  
+• We then create polynomials (with a degree chosen by the user) whose coefficients are randomly selected within a restricted interval. The polynomials represent individuals, and their number (also chosen by the user) corresponds to the population size.  
+• To calculate the fitness (or selective value) of the polynomials, we simply sum the vertical distances between these polynomials and the points.  
+• From a population and the individuals’ scores, we generate a new generation by simulating an essential evolutionary principle: the fittest individuals tend to have more offspring; this is the analogue of natural selection.  
+• To do this, we sample the new generation by assigning parents probabilities proportional to their fitness. In this way, we also leave some room for chance. The smaller the population, the more the distribution of generation n+1 may deviate from what is expected: this is the analogue of genetic drift.  
+• When creating an offspring, we add random modifications to the polynomial coefficients: this is the analogue of mutation.  
+• We repeat the process and observe, across generations, how the polynomials move closer to the points.  
+  
+It should be noted that this optimization problem has already been solved elsewhere, but our objective here is not to find the best polynomial; rather, it is to better understand a Darwinian evolutionary framework.  
+  
+From this simple algorithm, it is already possible to observe complex biological mechanisms, particularly those related to the “shifting balance theory”: the population of polynomials can remain trapped around a local maximum, because escaping it would require passing through much lower scores. Similarly, in evolutionary biology, people often speak of a “fitness landscape” made up of hills (local maxima) and valleys (corresponding to genotypes with lower fitness). Very interestingly, drift, by introducing random fluctuations in genotype frequencies, can allow the population to move toward a better local maximum, that is, toward a better evolutionary exploration of the landscape. This phenomenon is controlled by population size: the larger the population, the faster it will find a local maximum, but the less likely it will be to move away from it in search of a better one.  
+  
+→ If you would like to test my GAs, I recommend using Processing, which is easy to install and more interactive. 
+→ For more details on GAs: [Detail_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
+→ A slightly more elaborate GA for a more difficult problem (adapting shapes to a 2D landscape): [Landscape](mes-AG/Paysage/paysage_processing/paysage.pde)  
