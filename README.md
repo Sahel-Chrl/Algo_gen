@@ -18,7 +18,7 @@ Notons que ce problème d’optimisation a déjà résolu par ailleurs, mais not
 À partir de cet algorithme pourtant simple, on peut observer des mécanismes biologiques déjà complexes, notamment autour de la « shifting balance theory » : la population de polynômes peut rester bloquée autour d’un maximum local, car pour s’en échapper, il faudrait passer par des scores bien moins bons. De même, en biologie évolutive, on parle souvent du « paysage de fitness » composé de collines (des maxima locaux) et de vallées (correspondant à des génotypes de moindre fitness). De façon très intéressante, la dérive, en ajoutant des fluctuations aléatoires des fréquences des génotypes, peut permettre le passage vers un meilleur maximum local, c’est-à-dire une meilleure exploration évolutive du paysage. Ce phénomène est contrôlé par la taille de la population : plus elle est grande, plus elle trouvera un maximum local rapidement, mais moins elle pourra s’en éloigner pour en trouver un meilleur.  
   
 → Si vous souhaitez tester mes AG, je vous conseille d'utiliser Processing, simple à installer et plus interactif.  
-→ Pour plus de détails sur les AG : [detail_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt). 
+→ Pour plus de détails sur les AG : [detail_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt).  
 → Un AG un petit peu plus élaboré, pour un problème plus difficile (adapter des formes à un paysage 2d) : [Paysage](mes-AG/Paysage/paysage_processing/paysage.pde)  
 
 
