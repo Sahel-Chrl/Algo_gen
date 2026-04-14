@@ -44,6 +44,6 @@ It should be noted that this optimization problem has already been solved elsewh
   
 From this simple algorithm, it is already possible to observe complex biological mechanisms, particularly those related to the “shifting balance theory”: the population of polynomials can remain trapped around a local maximum, because escaping it would require passing through much lower scores. Similarly, in evolutionary biology, people often speak of a “fitness landscape” made up of hills (local maxima) and valleys (corresponding to genotypes with lower fitness). Very interestingly, drift, by introducing random fluctuations in genotype frequencies, can allow the population to move toward a better local maximum, that is, toward a better evolutionary exploration of the landscape. This phenomenon is controlled by population size: the larger the population, the faster it will find a local maximum, but the less likely it will be to move away from it in search of a better one.  
   
-→ If you would like to test my GAs, I recommend using Processing, which is easy to install and more interactive. 
-→ For more details on GAs: [details_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)  
+→ If you would like to test my GAs, I recommend using Processing, which is easy to install and more interactive.   
+→ For more details on GAs: [details_AG](comprendre_creer_un_AG/comprendre-genetic-AG.txt)   
 → A slightly more elaborate GA for a more difficult problem (adapting shapes to a 2D landscape): [Landscape](mes-AG/Paysage/paysage_processing/paysage.pde)  
