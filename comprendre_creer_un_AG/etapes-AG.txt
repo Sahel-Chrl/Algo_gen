@@ -1,42 +1,36 @@
 Processus de l'AG :
-voici la serie d'etapes qui imitent les processus evolutifs.
+voici la série d'étapes qui imitent les processus évolutifs.
 
-1// Initialisation : generer une population initiale d'individus avec diversite.
-2// Evaluation : calculer/quantifier l'aptitude de chaque individus. (fct aptitude*).
-3// Selection : utiliser les criteres de selection en fonction des aptitudes pour 
-determiner des parents.
-4// Crossover : combiner le materiel genetique des parents en utilisant la fct de 
-croisement, pour generer des nouveaux individus.
-5// Mutation : utiliser la fct mutation sur la descendence pour maintenir de la diversité.
-6// Remplacement : remplacer une partie, ou la totalite de la population initiale par 
+1// Initialisation : générer une population initiale d'individus avec diversité.
+2// Évaluation : calculer/quantifier l'aptitude de chaque individu. (fct aptitude*).
+3// Sélection : utiliser les critères de sélection en fonction des aptitudes pour
+déterminer des parents.
+4// Crossover : combiner le matériel génétique des parents en utilisant la fct de
+croisement, pour générer de nouveaux individus.
+5// Mutation : utiliser la fct mutation sur la descendance pour maintenir de la diversité.
+6// Remplacement : remplacer une partie, ou la totalité de la population initiale par
 la nouvelle.
-7// Repetition : activer une fct de repetition. 
+7// Répétition : activer une fct de répétition.
 
-
-Le codage doit satisfaire le thm fondamental des AG :
-les shèmes de petite longueur utile, d'ordre faible et de performence au-dessus de
-la moyenne font l'objet d'un nombre de tests exponentiellement croissant au cours des
-generations successives de la population.
-Voire sur https://www.anyflo.com/bret/cours/ag/ag3.htm#theoreme
 
 
 Composantes d'un AG :
- - Population : ensembles de solutions candidates (individus).
- Chaque individu est represente par un chromosome code en binaire, 
- tableau, listes...
- Dans l'exemple du chemin des camions, chaque individu est un chamin.
- - Fonction Aptitude : les valeurs les plus eleves/basses/moyennes corespondront aux
- meilleurs solutions, cette fonction nous quantifie la qualite d'une 
- solution.
- Pour les camions, la fonction peut revoyer la vitesse de livraison.
- - Fonction de Selection : Cette fonction recupere les donnes de la fonction 
- d'aptitude et les tries.
- Il existe plusieurs methodes de selection : par tournois, par roulette, par rang...
- - Fonction de Croisement : combine l'informations de deux/plus individus pour creer
- une descendance. Les techniques de croisement les plus courantes sont 
- le croisement en un point/plusieurs point (choisir un/plusieurs point aleatoire et echanger le
- materiel genetique de deux parents en ce point), le croisement uniforme(decider de maniere 
- aleatoire quel parent apportera chaque gene), les croisement mixte(melanger les genes des parents).
- - Fonction mutation : Elle introduit des changements aleatoire dans le materiel genetique de 
- la progeniture. Ces mutations peuvent etre simples comme complexe.
+- Population : ensemble de solutions candidates (individus).
+Chaque individu est représenté par un chromosome codé en binaire,
+tableau, listes...
+Dans l'exemple du chemin des camions, chaque individu est un chemin.
+- Fonction d'aptitude : les valeurs les plus élevées/basses/moyennes correspondront aux
+meilleures solutions, cette fonction nous quantifie la qualité d'une
+solution.
+Pour les camions, la fonction peut renvoyer la vitesse de livraison.
+- Fonction de sélection : cette fonction récupère les données de la fonction
+d'aptitude et les trie.
+Il existe plusieurs méthodes de sélection : par tournois, par roulette, par rang...
+- Fonction de croisement : combine les informations de deux/plusieurs individus pour créer
+une descendance. Les techniques de croisement les plus courantes sont
+le croisement en un point/plusieurs points (choisir un/plusieurs points aléatoires et échanger le
+matériel génétique de deux parents en ce point), le croisement uniforme (décider de manière
+aléatoire quel parent apportera chaque gène), les croisements mixtes (mélanger les gènes des parents).
+- Fonction de mutation : elle introduit des changements aléatoires dans le matériel génétique de
+la progéniture. Ces mutations peuvent être simples comme complexes.
 
