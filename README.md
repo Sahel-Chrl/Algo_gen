@@ -7,7 +7,7 @@ Nous pouvons par exemple observer plus en détail mon premier AG : « AG-polynom
   
 En voici une explication :  
 •	Nous commençons par placer des points aléatoirement dans une fenêtre du plan ; ces points représentent l'environnement auquel les polynômes devront s’adapter.  
-•	Nous créons ensuite des polynômes (de degré fixé par l’utilisateur) dont les coefficients sont tirés au hasard dans un intervalle restreint. Les polynômes représent des individus, et leur nombre (choisi par l’utilisateur) correspond à la taille de la population.
+•	Nous créons ensuite des polynômes (de degré fixé par l’utilisateur) dont les coefficients sont tirés au hasard dans un intervalle restreint. Les polynômes représentent des individus, et leur nombre (choisi par l’utilisateur) correspond à la taille de la population.  
 •	Pour calculer la fitness (ou valeur sélective) des polynômes, nous sommons simplement les distances verticales de ces polynômes aux points.  
 •	À partir d'une population et du score des individus, nous générons une nouvelle génération, en simulant un principe évolutif essentiel : les plus adaptés tendent à avoir une descendance plus nombreuse ; c’est l’analogue de la sélection naturelle.  
 •	Pour ce faire, nous tirons la nouvelle génération en assignant aux parents des probabilités correspondant à leur fitness. Ainsi, nous laissons aussi une certaine place au hasard. Plus la population est petite, plus la distribution de la génération n+1 pourra s’éloigner de l’attendu : c’est l’analogue de la dérive génétique.  
