@@ -3,8 +3,8 @@ partie fermée de R² et de trouver les polynômes d'un degré fixé pour lesque
 la courbe est la plus faible possible.
 
 Premièrement, l'algo répartira aléatoirement dans une fenêtre le nombre de points choisi par l'utilisateur.
-Ces points correspondront à l'environnement auquel les individus devront s'adapter. Pour nous, les humains, on doit
-s'adapter le mieux possible à la météo autour de nous ou bien aux prédateurs ; eh bien, la météo peut être assimilée
+Ces points correspondront à l'environnement auquel les individus devront s'adapter. Pour nous, les humains, il est necessaire de
+s'adapter le mieux possible à la météo autour de nous ou bien aux prédateurs par exemple; eh bien, la météo peut être assimilée
 à un de ces points et les prédateurs à un autre.
 
 Les polynômes seront donc les individus qui évoluent pour s'adapter le mieux possible à l'environnement, c.-à-d. ici
