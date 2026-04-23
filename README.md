@@ -2,7 +2,8 @@
 # Algo-gen 💻🧬
 Ce projet vise à explorer les liens entre la biologie évolutive et les algorithmes génétiques (AG, inspirés du principe d’évolution par sélection naturelle). Pour cela, je programme de tels algorithmes, pour essayer ensuite de relier les dynamiques simulées à des principes évolutifs connus. Cette approche me permet d’aborder la biologie évolutive sous un angle théorique, pour mieux en saisir les fondements, et peut-être identifier des questions de recherche pertinentes.  
   
-Nous pouvons par exemple observer plus en détail mon premier AG : « AG-polynomes », codé ici en Processing et ici en C++. Son objectif est simple : optimiser des polynômes pour les rapprocher de points fixes imposés, comme une « population de polynômes » s'adapterait à son environnement.  
+Nous pouvons par exemple observer plus en détail mon premier AG : « AG-polynomes », codé ici en Processing et ici en C++. [polynome](mes-AG/Paysage/polynome/polynome)  
+ Son objectif est simple : optimiser des polynômes pour les rapprocher de points fixes imposés, comme une « population de polynômes » s'adapterait à son environnement.  
   
 En voici une explication :  
 •	Nous commençons par placer des points aléatoirement dans une fenêtre du plan ; ces points représentent l'environnement auquel les polynômes devront s’adapter.  
